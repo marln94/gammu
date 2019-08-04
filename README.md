@@ -15,7 +15,7 @@ Antes de iniciar la instalación debes instalar [NodeJS](https://nodejs.org/es/)
 
 	    npm install
 
-Este comando instalará todas las dependencias del proyecto, puede tardar un rato.
+	Este comando instalará todas las dependencias del proyecto, puede tardar un rato.
 - Al terminar la instalación ejecuta el siguiente comando:
 
 	    node index.js
