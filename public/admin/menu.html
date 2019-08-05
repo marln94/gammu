@@ -1,0 +1,68 @@
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!">Perfil</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">Cerrar sesión</a></li>
+</ul>
+<nav>
+    <div class="nav-wrapper indigo">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right">
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Usuario<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container"><a href="#" data-target="left-side" class="top-nav l sidenav-trigger full hide-on-large-only"><i class="material-icons white-text">menu</i></a></div>
+<ul id="left-side" class="sidenav sidenav-fixed indigo">
+    <li><a href="./administrar_archivos.html"><i class="material-icons white-text">collections</i>
+        <span class="menu-title white-text"> Archivos </span>
+    </a></li>
+    <li><a href="./pagina_principal.html"><i class="material-icons white-text">web_asset</i>
+        <span class="menu-title white-text"> Principal </span>
+    </a></li>
+    <li><a href="./paginas.html"><i class="material-icons white-text">file_copy</i>
+        <span class="menu-title white-text"> Páginas </span>
+    </a></li>
+    <li><a href="./entradas.html"><i class="material-icons white-text">create</i>
+        <span class="menu-title white-text"> Entradas </span>
+    </a></li>
+    <li><a href="./comentarios.html"><i class="material-icons white-text">comment</i>
+        <span class="menu-title white-text"> Comentarios </span>
+    </a></li>
+    <li><a href="./menus.html"><i class="material-icons white-text">menu</i>
+        <span class="menu-title white-text"> Menús </span>
+    </a></li>
+    <li><a href="./temas.html"><i class="material-icons white-text">palette</i>
+        <span class="menu-title white-text"> Temas </span>
+    </a></li>
+    <li><a href="./seguridad.html"><i class="material-icons white-text">lock</i>
+        <span class="menu-title white-text"> Seguridad </span>
+    </a></li>
+    <li><a href="./configuraciones.html"><i class="material-icons white-text">settings</i>
+        <span class="menu-title white-text"> Configuraciones </span>
+    </a></li>
+    <li><a href="#" id="ocultar"><i class="material-icons white-text">navigate_before</i>
+        <span class="menu-title white-text"> Ocultar </span>
+    </a></li>
+    
+</ul>
+
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    console.log(getUrlParameter('estado-menu'));
+
+</script>
