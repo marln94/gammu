@@ -1,0 +1,42 @@
+<div class="main">
+    <h3>Gestión de archivos</h3>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="row">
+                <div class="file-field input-field col s12 m10">
+                    <div class="btn indigo">
+                        <span><i class="material-icons left">add</i>Archivo</span>
+                        <input type="file" accept="image/*">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="col s12 m2" id="subir">
+                    <button class="btn orange"><i class="material-icons left">file_upload</i>Subir</button>
+                </div>
+            </div>
+        </div>
+        <div class="col s6 m4 l3" *ngFor="let archivo of archivos">
+
+            <div class="card">
+                <div class="card-image">
+                    <img [src]="'../../../assets/upload/'+archivo.miniatura"
+                        *ngIf="archivo.tipo == 'imagen' || archivo.tipo == 'video'">
+                    <img [src]="'../../../assets/img/miniaturas/'+archivo.extension+'.png'" *ngIf="archivo.extension">
+                </div>
+                <div class="card-content">
+                    <p>{{ archivo.nombre }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="boton-archivo"><i class="material-icons indigo-text"
+                            *ngIf="archivo.tipo == 'imagen'">content_copy</i></a>
+                    <a href="#" class="boton-archivo"><i class="material-icons indigo-text">file_download</i></a>
+                    <a href="#" class="boton-archivo"><i class="material-icons indigo-text">delete</i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
