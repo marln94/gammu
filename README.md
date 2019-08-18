@@ -11,7 +11,7 @@ Antes de iniciar la instalación debes instalar [NodeJS](https://nodejs.org/es/)
 
 - Clona o descarga este repositorio en tu PC.
 
-- Abre una terminal (e.g *cmd* en Windows o *bash* en linux), navega hasta la carpeta que acabas de clonar/descargar y ejecuta el siguiente comando: 
+- Abre una terminal (*cmd* en Windows o *bash* en linux), navega hasta la carpeta `/server` dentro de la carpeta que acabas de clonar/descargar y ejecuta el siguiente comando: 
 
 	    npm install
 
@@ -22,6 +22,6 @@ Antes de iniciar la instalación debes instalar [NodeJS](https://nodejs.org/es/)
 
 - Ahora solo debes abrir el navegador e ingresar la siguiente URL:
 
-	   localhost:333
+	   localhost:3333
 
 ¡Listo! Ya tienes tu servidor levantado, listo para editar tu nueva súper página web.
