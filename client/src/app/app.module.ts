@@ -4,9 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { AceEditorModule } from "ng2-ace-editor";
+
+import { NecesitaAuthGuard } from "../app/guards/necesita-auth.guard";
 
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -30,12 +34,13 @@ import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: 'admin/login',
     component: LoginComponent,
   },
   {
     path: 'admin/archivos',
-    component: ArchivosComponent
+    component: ArchivosComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/pagina-principal',
@@ -126,10 +131,14 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     CKEditorModule,
-    AceEditorModule
+    AceEditorModule,
+    HttpClientModule,
+    FormsModule
     // MaterializeModule
   ],
-  providers: [],
+  providers: [
+    NecesitaAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as M from "materialize-css/dist/js/materialize";
 
+import { ApiService } from "../../services/api.service";
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -13,7 +15,7 @@ export class SidenavComponent implements OnInit {
   @ViewChild('sidenav', {static: false}) sideNav: any;
   @ViewChild('dropdown1', {static: false}) dropdown1: any;
 
-  constructor() { 
+  constructor(private api:ApiService) { 
     
   }
 
@@ -32,6 +34,10 @@ export class SidenavComponent implements OnInit {
       let instance = M.Sidenav.getInstance(this.sideNav.nativeElement);
       instance.close();
     }
+  }
+
+  logout() {
+    this.api.logout().subscribe(r => console.log(r))
   }
 
 }
