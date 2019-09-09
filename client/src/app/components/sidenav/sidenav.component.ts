@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from "@angular/router";
 import * as M from "materialize-css/dist/js/materialize";
 
 import { ApiService } from "../../services/api.service";
@@ -15,7 +16,7 @@ export class SidenavComponent implements OnInit {
   @ViewChild('sidenav', {static: false}) sideNav: any;
   @ViewChild('dropdown1', {static: false}) dropdown1: any;
 
-  constructor(private api:ApiService) { 
+  constructor(private api:ApiService, private router:Router) { 
     
   }
 
@@ -37,7 +38,9 @@ export class SidenavComponent implements OnInit {
   }
 
   logout() {
-    this.api.logout().subscribe(r => console.log(r))
+    this.api.logout().subscribe(r => {
+      this.router.navigateByUrl('/admin')
+    })
   }
 
 }

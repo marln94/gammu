@@ -34,6 +34,10 @@ import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.
 
 const routes: Routes = [
   {
+    path: 'admin',
+    redirectTo: 'admin/archivos'
+  },
+  {
     path: 'admin/login',
     component: LoginComponent,
   },
@@ -44,63 +48,78 @@ const routes: Routes = [
   },
   {
     path: 'admin/pagina-principal',
-    component: PaginaPrincipalComponent
+    component: PaginaPrincipalComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/configuraciones',
-    component: ConfiguracionesComponent
+    component: ConfiguracionesComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/paginas',
-    component: PaginasComponent
+    component: PaginasComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/paginas/nueva-pagina-html',
-    component: NuevaPaginaHtmlComponent
+    component: NuevaPaginaHtmlComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/paginas/nueva-pagina-posts',
-    component: NuevaPaginaPostsComponent
+    component: NuevaPaginaPostsComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/posts',
-    component: PostsComponent
+    component: PostsComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/posts/nuevo',
-    component: NuevoPostComponent
+    component: NuevoPostComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/comentarios',
-    component: ComentariosComponent
+    component: ComentariosComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/menus',
-    component: MenusComponent
+    component: MenusComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/menus/nuevo',
-    component: NuevoMenuComponent
+    component: NuevoMenuComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/temas',
-    component: TemasComponent
+    component: TemasComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/temas/nuevo',
-    component: NuevoTemaComponent
+    component: NuevoTemaComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/seguridad',
-    component: SeguridadComponent
+    component: SeguridadComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/seguridad/nuevo-rol',
-    component: NuevoRolComponent
+    component: NuevoRolComponent,
+    canActivate: [NecesitaAuthGuard]
   },
   {
     path: 'admin/seguridad/nuevo-usuario',
-    component: NuevoUsuarioComponent
+    component: NuevoUsuarioComponent,
+    canActivate: [NecesitaAuthGuard]
   }
 ];
 
