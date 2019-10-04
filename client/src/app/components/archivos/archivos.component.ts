@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-archivos',
@@ -7,31 +8,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArchivosComponent implements OnInit {
 
-  archivos = [
-    {
-      nombre: 'paradise',
-      ruta: 'paradise_ocean_tropical_blue_palm_beach_coast_sea_emerald_5420x3613.jpg',
-      tipo: 'imagen',
-      shortcut: {tipo: 'imagen', id: '1nf91837neeyjh'},
-      miniatura: 'paradise_ocean_tropical_blue_palm_beach_coast_sea_emerald_5420x3613.jpg'
-    },
-    {
-      nombre: 'cancion',
-      ruta: 'hola.mp3',
-      tipo: 'audio',
-      extension: 'mp3'
-    },
-    {
-      nombre: 'graduacion',
-      ruta: 'graduacion.mp4',
-      tipo: 'video',
-      miniatura: 'lobito.jpg'
-    }
-  ]
+  archivos = []
+  archivoSubir
 
-  constructor() { }
+  URL_BACKEND = 'http://localhost:3333/api/'
 
-  ngOnInit() {
+  instanciaModal
+  codigoModal
+
+  constructor(private http: HttpClient) {
+    this.obtenerArchivos()
   }
 
+  ngOnInit() {
+    var elems = document.querySelectorAll('.modal');
+    this.instanciaModal = M.Modal.init(elems, {});
+  }
+
+  async obtenerArchivos() {
+    this.archivos = await this.http.get(this.URL_BACKEND + 'archivos').toPromise()
+  }
+
+  cambio(event) {
+    this.archivoSubir = event.target.files[0]
+  }
+
+  async subirArchivo() {
+    let formData = new FormData()
+    formData.append("archivo", this.archivoSubir, this.archivoSubir.name)
+    await this.http.post(this.URL_BACKEND + 'archivos', formData).toPromise()
+
+    document.getElementById('archivo').value = null
+    this.obtenerArchivos()
+
+  }
+
+  async eliminarArchivo(id) {
+    await this.http.delete(this.URL_BACKEND + 'archivos/' + id).toPromise()
+    this.obtenerArchivos()
+  }
+
+  mostrarModal(codigo) {
+    this.codigoModal = codigo
+    this.instanciaModal[0].open()
+  }
 }

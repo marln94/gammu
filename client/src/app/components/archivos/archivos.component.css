@@ -5,3 +5,7 @@
 #subir {
     margin-top: 1rem;
 }
+
+a {
+    cursor: pointer;
+}

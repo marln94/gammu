@@ -8,9 +8,11 @@ const database = require('./modules/database');
 
 const usuario = require('./models/usuario');
 
+const archivosRouter = require('./routers/archivos')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // support encoded bodies
 
 const corsOptions = {
     origin: 'http://localhost:4200',
@@ -20,12 +22,15 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 app.use(express.static("../client/dist/gammu"));
+app.use(express.static("./public"));
 
 app.use(session({ secret: "ASDFE$%#%", resave: true, saveUninitialized: true, cookie: { secure: false } }));
 
 app.listen(3333, function () {
     console.log("Servidor levantado");
 });
+
+app.use('/api/archivos', archivosRouter)
 
 app.post("/api/login", function (req, res) {
     console.log(req.body.correo, req.body.contrasena);

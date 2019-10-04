@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { AceEditorModule } from "ng2-ace-editor";
@@ -152,7 +152,8 @@ const routes: Routes = [
     CKEditorModule,
     AceEditorModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     // MaterializeModule
   ],
   providers: [

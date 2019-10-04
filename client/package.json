@@ -28,6 +28,7 @@
     "jquery": "^2.2.4",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.24.0",
+    "multer": "^1.4.2",
     "ng2-ace-editor": "^0.3.9",
     "ngx-highlightjs": "^3.0.3",
     "rxjs": "~6.4.0",
