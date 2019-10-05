@@ -1,0 +1,38 @@
+<div class="main">
+    <h3>Página principal</h3>
+
+    <div class="row">
+        <div class="col s12 editor">
+            <ckeditor (change)="onChange($event)" [editor]="Editor" [config]="editorConfig" [(ngModel)]="htmlData"></ckeditor>
+        </div>
+
+        <div class="col s12">
+            <h4>Encabezado</h4>
+            <div class="file-field input-field">
+                <div class="btn indigo">
+                    <span>Imagen</span>
+                    <input type="file" (change)="cambio($event)" accept="image/*">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" id="archivo" type="text">
+                </div>
+            </div>
+            <div class="input-field mt-1">
+                <input id="encabezado" type="text" [(ngModel)]="textoEncabezado" class="validate">
+                <label for="encabezado">Texto de encabezado</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <h4>Pie de página</h4>
+            <div class="input-field mt-1">
+                <input id="pie-pagina" [(ngModel)]="textoPie" type="text" class="validate">
+                <label for="pie-pagina">Algún texto</label>
+            </div>
+        </div>
+
+        <div class="col s12 center">
+            <button class="btn indigo" (click)="guardar()">Guardar</button>
+        </div>
+    </div>
+
+</div>

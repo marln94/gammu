@@ -316,7 +316,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-sidenav></app-sidenav>\r\n\r\n<main>\r\n    <router-outlet></router-outlet>\r\n</main>\r\n"
+module.exports = "<app-sidenav *ngIf=\"isLogged\"></app-sidenav>\r\n\r\n<main>\r\n    <router-outlet></router-outlet>\r\n</main>"
 
 /***/ }),
 
@@ -327,7 +327,7 @@ module.exports = "<app-sidenav></app-sidenav>\r\n\r\n<main>\r\n    <router-outle
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main\">\n    <h3>Gestión de archivos</h3>\n\n    <div class=\"row\">\n        <div class=\"col s12\">\n            <div class=\"row\">\n                <div class=\"file-field input-field col s12 m10\">\n                    <div class=\"btn indigo\">\n                        <span><i class=\"material-icons left\">add</i>Archivo</span>\n                        <input type=\"file\" accept=\"image/*\">\n                    </div>\n                    <div class=\"file-path-wrapper\">\n                        <input class=\"file-path validate\" type=\"text\">\n                    </div>\n                </div>\n                <div class=\"col s12 m2\" id=\"subir\">\n                    <button class=\"btn orange\"><i class=\"material-icons left\">file_upload</i>Subir</button>\n                </div>\n            </div>\n        </div>\n        <div class=\"col s6 m4 l3\" *ngFor=\"let archivo of archivos\">\n\n            <div class=\"card\">\n                <div class=\"card-image\">\n                    <img [src]=\"'../../../assets/upload/'+archivo.miniatura\"\n                        *ngIf=\"archivo.tipo == 'imagen' || archivo.tipo == 'video'\">\n                    <img [src]=\"'../../../assets/img/miniaturas/'+archivo.extension+'.png'\" *ngIf=\"archivo.extension\">\n                </div>\n                <div class=\"card-content\">\n                    <p>{{ archivo.nombre }}</p>\n                </div>\n                <div class=\"card-action\">\n                    <a href=\"#\" class=\"boton-archivo\"><i class=\"material-icons indigo-text\"\n                            *ngIf=\"archivo.tipo == 'imagen'\">content_copy</i></a>\n                    <a href=\"#\" class=\"boton-archivo\"><i class=\"material-icons indigo-text\">file_download</i></a>\n                    <a href=\"#\" class=\"boton-archivo\"><i class=\"material-icons indigo-text\">delete</i></a>\n                </div>\n            </div>\n\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"main\">\n    <h3>Gestión de archivos</h3>\n\n    <div class=\"row\">\n        <div class=\"col s12\">\n            <form (ngSubmit)=\"subirArchivo()\">\n                <div class=\"row\">\n                    <div class=\"file-field input-field col s12 m10\">\n                        <div class=\"btn indigo\">\n                            <span><i class=\"material-icons left\">add</i>Archivo</span>\n                            <input type=\"file\" (change)=\"cambio($event)\">\n                        </div>\n                        <div class=\"file-path-wrapper\">\n                            <input class=\"file-path validate\" id=\"archivo\" type=\"text\">\n                        </div>\n                    </div>\n                    <div class=\"col s12 m2\" id=\"subir\">\n                        <button class=\"btn orange\" type=\"submit\"><i\n                                class=\"material-icons left\">file_upload</i>Subir</button>\n                    </div>\n                </div>\n            </form>\n        </div>\n        <div *ngIf=\"archivos.length == 0\">\n            <p>No hay archivos </p>\n        </div>\n        <div class=\"col s6 m4 l3\" *ngFor=\"let archivo of archivos\">\n\n            <div class=\"card\">\n                <div class=\"card-image\">\n                    <img src=\"../../../assets/img/miniaturas/video-file.png\" *ngIf=\"archivo.tipo.includes('video')\">\n                    <img [src]=\"archivo.miniatura\" *ngIf=\"archivo.tipo.includes('image')\">\n                    <img [src]=\"'../../../assets/img/miniaturas/'+archivo.extension+'.png'\"\n                        *ngIf=\"!archivo.tipo.includes('image') && !archivo.tipo.includes('video')\">\n                </div>\n                <div class=\"card-content\">\n                    <p class=\"truncate\">{{ archivo.nombre }}</p>\n                </div>\n                <div class=\"card-action\">\n                    <a (click)=\"mostrarModal(archivo.shortcut)\" class=\"boton-archivo\"><i class=\"material-icons indigo-text\"\n                            *ngIf=\"archivo.tipo.includes('image')\">content_copy</i></a>\n                    <a [href]=\"archivo.ruta\" class=\"boton-archivo\" target=\"_blank\"><i\n                            class=\"material-icons indigo-text\">file_download</i></a>\n                    <a (click)=\"eliminarArchivo(archivo._id)\" class=\"boton-archivo\"><i\n                            class=\"material-icons indigo-text\">delete</i></a>\n                </div>\n            </div>\n\n        </div>\n    </div>\n</div>\n\n\n<div id=\"modal1\" class=\"modal\">\n    <div class=\"modal-content\">\n      <h4>Shortcut del archivo</h4>\n      <p>{{ codigoModal }}</p>\n    </div>\n    <div class=\"modal-footer\">\n      <a class=\"modal-close btn orange waves-effect waves-green\">Cerrar</a>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -360,7 +360,7 @@ module.exports = "<div class=\"main\">\n\n    <h3>Configuraciones</h3>\n    <div
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>login works!</p>\n"
+module.exports = "<main class=\"mn-inner container\">\n    <div class=\"valign\">\n        <div class=\"row\">\n\n            <div class=\"col s12 m8 l8 offset-m2\">\n                <br><br><br><br><br>\n                <div class=\"center\">\n                    <img src=\"../../../assets/img/favicon.png\" alt=\"\">\n                </div>\n                <div class=\"card white darken-1\">\n                    <div class=\"card-content \">\n                        <span class=\"card-title\">Iniciar sesión</span>\n                        <div class=\"row\">\n                            <div class=\"\">\n                                <div class=\"input-field col s12\">\n                                    <input id=\"correo\" name=\"correo\" [(ngModel)]=\"correo\" type=\"email\" class=\"validate\">\n                                    <label for=\"correo\">Correo</label>\n                                </div>\n\n                                <div class=\"input-field col s12\">\n                                    <input id=\"password\" name=\"password\" [(ngModel)]=\"contrasena\" type=\"password\" class=\"validate\">\n                                    <label for=\"password\">Contraseña</label>\n                                </div>\n                                <div>\n                                    <div class=\"col s12 left-align m-t-sm\">\n                                        <button class=\"btn indigo\" (click)=\"login()\">Entrar</button>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</main>"
 
 /***/ }),
 
@@ -503,7 +503,7 @@ module.exports = "<div class=\"main\">\n    <h3>Roles</h3>\n\n    <div class=\"r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul id=\"dropdown1\" class=\"dropdown-content\">\n    <li><a href=\"#!\">Perfil</a></li>\n    <li class=\"divider\"></li>\n    <li><a href=\"#!\">Cerrar sesión</a></li>\n</ul>\n<div class=\"navbar-fixed\">\n    <nav>\n        <div class=\"nav-wrapper indigo\">\n            <a href=\"#\" data-target=\"sidenav\" class=\"top-nav l sidenav-trigger full hide-on-large-only\">\n                <i class=\"material-icons white-text\">menu</i>\n            </a>\n            <a routerLink=\"/admin\" class=\"brand-logo\">Logo</a>\n            <ul id=\"nav-mobile\" class=\"right\">\n                <li><a #dropdown1 class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown1\">Usuario<i\n                            class=\"material-icons right\">arrow_drop_down</i></a></li>\n            </ul>\n        </div>\n    </nav>\n</div>\n\n<div class=\"container\">\n    <!-- <a href=\"#\" data-target=\"sidenav\" class=\"top-nav l sidenav-trigger full hide-on-large-only\">\n        <i class=\"material-icons white-text\">menu</i>\n    </a> -->\n</div>\n<ul #sidenav id=\"sidenav\" class=\"sidenav sidenav-fixed indigo\">\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/archivos\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">collections</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Archivos </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/pagina-principal\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">web_asset</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Principal </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/paginas\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">file_copy</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Páginas </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/posts\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">create</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Posts </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/comentarios\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">comment</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Comentarios </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/menus\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">menu</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Menús </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/temas\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">palette</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Temas </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/seguridad\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">lock</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Seguridad </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/configuraciones\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">settings</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Configuraciones </span>\n        </a></li>\n\n</ul>"
+module.exports = "<ul id=\"dropdown1\" class=\"dropdown-content\">\n    <li><a href=\"#!\">Perfil</a></li>\n    <li class=\"divider\"></li>\n    <li><a (click)=\"logout()\">Cerrar sesión</a></li>\n</ul>\n<div class=\"navbar-fixed\">\n    <nav>\n        <div class=\"nav-wrapper indigo\">\n            <a href=\"#\" data-target=\"sidenav\" class=\"top-nav l sidenav-trigger full hide-on-large-only\">\n                <i class=\"material-icons white-text\">menu</i>\n            </a>\n            <a routerLink=\"/admin\" class=\"brand-logo\">Logo</a>\n            <ul id=\"nav-mobile\" class=\"right\">\n                <li><a #dropdown1 class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown1\">Usuario<i\n                            class=\"material-icons right\">arrow_drop_down</i></a></li>\n            </ul>\n        </div>\n    </nav>\n</div>\n\n<div class=\"container\">\n    <!-- <a href=\"#\" data-target=\"sidenav\" class=\"top-nav l sidenav-trigger full hide-on-large-only\">\n        <i class=\"material-icons white-text\">menu</i>\n    </a> -->\n</div>\n<ul #sidenav id=\"sidenav\" class=\"sidenav sidenav-fixed indigo\">\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/archivos\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">collections</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Archivos </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/pagina-principal\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">web_asset</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Principal </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/paginas\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">file_copy</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Páginas </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/posts\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">create</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Posts </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/comentarios\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">comment</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Comentarios </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/menus\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">menu</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Menús </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/temas\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">palette</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Temas </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/seguridad\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">lock</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Seguridad </span>\n        </a></li>\n    <li routerLinkActive=\"active\">\n        <a routerLink=\"/admin/configuraciones\" (click)=\"closeSidenav()\">\n            <i class=\"material-icons white-text\">settings</i>\n            <span class=\"menu-title white-text\" *ngIf=\"visibilidad\"> Configuraciones </span>\n        </a></li>\n\n</ul>"
 
 /***/ }),
 
@@ -541,13 +541,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/api.service */ "./src/app/services/api.service.ts");
+
+
 
 
 let AppComponent = class AppComponent {
-    constructor() {
+    constructor(api, router) {
+        this.api = api;
+        this.router = router;
         this.title = 'gammu';
+        this.isLogged = false;
+        router.events.forEach((event) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationStart"]) {
+                this.isLogged = yield this.api.isLogged();
+            }
+        }));
     }
 };
+AppComponent.ctorParameters = () => [
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
@@ -575,28 +591,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ckeditor/ckeditor5-angular */ "./node_modules/@ckeditor/ckeditor5-angular/fesm2015/ckeditor-ckeditor5-angular.js");
-/* harmony import */ var ng2_ace_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng2-ace-editor */ "./node_modules/ng2-ace-editor/index.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_sidenav_sidenav_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sidenav/sidenav.component */ "./src/app/components/sidenav/sidenav.component.ts");
-/* harmony import */ var _components_archivos_archivos_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/archivos/archivos.component */ "./src/app/components/archivos/archivos.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_pagina_principal_pagina_principal_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/pagina-principal/pagina-principal.component */ "./src/app/components/pagina-principal/pagina-principal.component.ts");
-/* harmony import */ var _components_configuraciones_configuraciones_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/configuraciones/configuraciones.component */ "./src/app/components/configuraciones/configuraciones.component.ts");
-/* harmony import */ var _components_paginas_paginas_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/paginas/paginas.component */ "./src/app/components/paginas/paginas.component.ts");
-/* harmony import */ var _components_nueva_pagina_html_nueva_pagina_html_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/nueva-pagina-html/nueva-pagina-html.component */ "./src/app/components/nueva-pagina-html/nueva-pagina-html.component.ts");
-/* harmony import */ var _components_nueva_pagina_posts_nueva_pagina_posts_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/nueva-pagina-posts/nueva-pagina-posts.component */ "./src/app/components/nueva-pagina-posts/nueva-pagina-posts.component.ts");
-/* harmony import */ var _components_posts_posts_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/posts/posts.component */ "./src/app/components/posts/posts.component.ts");
-/* harmony import */ var _components_nuevo_post_nuevo_post_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nuevo-post/nuevo-post.component */ "./src/app/components/nuevo-post/nuevo-post.component.ts");
-/* harmony import */ var _components_comentarios_comentarios_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/comentarios/comentarios.component */ "./src/app/components/comentarios/comentarios.component.ts");
-/* harmony import */ var _components_menus_menus_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/menus/menus.component */ "./src/app/components/menus/menus.component.ts");
-/* harmony import */ var _components_nuevo_menu_nuevo_menu_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/nuevo-menu/nuevo-menu.component */ "./src/app/components/nuevo-menu/nuevo-menu.component.ts");
-/* harmony import */ var _components_nuevo_tema_nuevo_tema_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/nuevo-tema/nuevo-tema.component */ "./src/app/components/nuevo-tema/nuevo-tema.component.ts");
-/* harmony import */ var _components_temas_temas_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/temas/temas.component */ "./src/app/components/temas/temas.component.ts");
-/* harmony import */ var _components_seguridad_seguridad_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/seguridad/seguridad.component */ "./src/app/components/seguridad/seguridad.component.ts");
-/* harmony import */ var _components_nuevo_rol_nuevo_rol_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/nuevo-rol/nuevo-rol.component */ "./src/app/components/nuevo-rol/nuevo-rol.component.ts");
-/* harmony import */ var _components_nuevo_usuario_nuevo_usuario_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/nuevo-usuario/nuevo-usuario.component */ "./src/app/components/nuevo-usuario/nuevo-usuario.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ckeditor/ckeditor5-angular */ "./node_modules/@ckeditor/ckeditor5-angular/fesm2015/ckeditor-ckeditor5-angular.js");
+/* harmony import */ var ng2_ace_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng2-ace-editor */ "./node_modules/ng2-ace-editor/index.js");
+/* harmony import */ var _app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../app/guards/necesita-auth.guard */ "./src/app/guards/necesita-auth.guard.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_sidenav_sidenav_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/sidenav/sidenav.component */ "./src/app/components/sidenav/sidenav.component.ts");
+/* harmony import */ var _components_archivos_archivos_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/archivos/archivos.component */ "./src/app/components/archivos/archivos.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_pagina_principal_pagina_principal_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/pagina-principal/pagina-principal.component */ "./src/app/components/pagina-principal/pagina-principal.component.ts");
+/* harmony import */ var _components_configuraciones_configuraciones_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/configuraciones/configuraciones.component */ "./src/app/components/configuraciones/configuraciones.component.ts");
+/* harmony import */ var _components_paginas_paginas_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/paginas/paginas.component */ "./src/app/components/paginas/paginas.component.ts");
+/* harmony import */ var _components_nueva_pagina_html_nueva_pagina_html_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nueva-pagina-html/nueva-pagina-html.component */ "./src/app/components/nueva-pagina-html/nueva-pagina-html.component.ts");
+/* harmony import */ var _components_nueva_pagina_posts_nueva_pagina_posts_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/nueva-pagina-posts/nueva-pagina-posts.component */ "./src/app/components/nueva-pagina-posts/nueva-pagina-posts.component.ts");
+/* harmony import */ var _components_posts_posts_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/posts/posts.component */ "./src/app/components/posts/posts.component.ts");
+/* harmony import */ var _components_nuevo_post_nuevo_post_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/nuevo-post/nuevo-post.component */ "./src/app/components/nuevo-post/nuevo-post.component.ts");
+/* harmony import */ var _components_comentarios_comentarios_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/comentarios/comentarios.component */ "./src/app/components/comentarios/comentarios.component.ts");
+/* harmony import */ var _components_menus_menus_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/menus/menus.component */ "./src/app/components/menus/menus.component.ts");
+/* harmony import */ var _components_nuevo_menu_nuevo_menu_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/nuevo-menu/nuevo-menu.component */ "./src/app/components/nuevo-menu/nuevo-menu.component.ts");
+/* harmony import */ var _components_nuevo_tema_nuevo_tema_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/nuevo-tema/nuevo-tema.component */ "./src/app/components/nuevo-tema/nuevo-tema.component.ts");
+/* harmony import */ var _components_temas_temas_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/temas/temas.component */ "./src/app/components/temas/temas.component.ts");
+/* harmony import */ var _components_seguridad_seguridad_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/seguridad/seguridad.component */ "./src/app/components/seguridad/seguridad.component.ts");
+/* harmony import */ var _components_nuevo_rol_nuevo_rol_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/nuevo-rol/nuevo-rol.component */ "./src/app/components/nuevo-rol/nuevo-rol.component.ts");
+/* harmony import */ var _components_nuevo_usuario_nuevo_usuario_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/nuevo-usuario/nuevo-usuario.component */ "./src/app/components/nuevo-usuario/nuevo-usuario.component.ts");
 // import { MaterializeModule } from "angular2-materialize";
+
+
+
 
 
 
@@ -626,71 +648,91 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: 'admin',
-        component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
+        redirectTo: 'admin/archivos'
+    },
+    {
+        path: 'admin/login',
+        component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"],
     },
     {
         path: 'admin/archivos',
-        component: _components_archivos_archivos_component__WEBPACK_IMPORTED_MODULE_9__["ArchivosComponent"]
+        component: _components_archivos_archivos_component__WEBPACK_IMPORTED_MODULE_12__["ArchivosComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/pagina-principal',
-        component: _components_pagina_principal_pagina_principal_component__WEBPACK_IMPORTED_MODULE_11__["PaginaPrincipalComponent"]
+        component: _components_pagina_principal_pagina_principal_component__WEBPACK_IMPORTED_MODULE_14__["PaginaPrincipalComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/configuraciones',
-        component: _components_configuraciones_configuraciones_component__WEBPACK_IMPORTED_MODULE_12__["ConfiguracionesComponent"]
+        component: _components_configuraciones_configuraciones_component__WEBPACK_IMPORTED_MODULE_15__["ConfiguracionesComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/paginas',
-        component: _components_paginas_paginas_component__WEBPACK_IMPORTED_MODULE_13__["PaginasComponent"]
+        component: _components_paginas_paginas_component__WEBPACK_IMPORTED_MODULE_16__["PaginasComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/paginas/nueva-pagina-html',
-        component: _components_nueva_pagina_html_nueva_pagina_html_component__WEBPACK_IMPORTED_MODULE_14__["NuevaPaginaHtmlComponent"]
+        component: _components_nueva_pagina_html_nueva_pagina_html_component__WEBPACK_IMPORTED_MODULE_17__["NuevaPaginaHtmlComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/paginas/nueva-pagina-posts',
-        component: _components_nueva_pagina_posts_nueva_pagina_posts_component__WEBPACK_IMPORTED_MODULE_15__["NuevaPaginaPostsComponent"]
+        component: _components_nueva_pagina_posts_nueva_pagina_posts_component__WEBPACK_IMPORTED_MODULE_18__["NuevaPaginaPostsComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/posts',
-        component: _components_posts_posts_component__WEBPACK_IMPORTED_MODULE_16__["PostsComponent"]
+        component: _components_posts_posts_component__WEBPACK_IMPORTED_MODULE_19__["PostsComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/posts/nuevo',
-        component: _components_nuevo_post_nuevo_post_component__WEBPACK_IMPORTED_MODULE_17__["NuevoPostComponent"]
+        component: _components_nuevo_post_nuevo_post_component__WEBPACK_IMPORTED_MODULE_20__["NuevoPostComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/comentarios',
-        component: _components_comentarios_comentarios_component__WEBPACK_IMPORTED_MODULE_18__["ComentariosComponent"]
+        component: _components_comentarios_comentarios_component__WEBPACK_IMPORTED_MODULE_21__["ComentariosComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/menus',
-        component: _components_menus_menus_component__WEBPACK_IMPORTED_MODULE_19__["MenusComponent"]
+        component: _components_menus_menus_component__WEBPACK_IMPORTED_MODULE_22__["MenusComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/menus/nuevo',
-        component: _components_nuevo_menu_nuevo_menu_component__WEBPACK_IMPORTED_MODULE_20__["NuevoMenuComponent"]
+        component: _components_nuevo_menu_nuevo_menu_component__WEBPACK_IMPORTED_MODULE_23__["NuevoMenuComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/temas',
-        component: _components_temas_temas_component__WEBPACK_IMPORTED_MODULE_22__["TemasComponent"]
+        component: _components_temas_temas_component__WEBPACK_IMPORTED_MODULE_25__["TemasComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/temas/nuevo',
-        component: _components_nuevo_tema_nuevo_tema_component__WEBPACK_IMPORTED_MODULE_21__["NuevoTemaComponent"]
+        component: _components_nuevo_tema_nuevo_tema_component__WEBPACK_IMPORTED_MODULE_24__["NuevoTemaComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/seguridad',
-        component: _components_seguridad_seguridad_component__WEBPACK_IMPORTED_MODULE_23__["SeguridadComponent"]
+        component: _components_seguridad_seguridad_component__WEBPACK_IMPORTED_MODULE_26__["SeguridadComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/seguridad/nuevo-rol',
-        component: _components_nuevo_rol_nuevo_rol_component__WEBPACK_IMPORTED_MODULE_24__["NuevoRolComponent"]
+        component: _components_nuevo_rol_nuevo_rol_component__WEBPACK_IMPORTED_MODULE_27__["NuevoRolComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     },
     {
         path: 'admin/seguridad/nuevo-usuario',
-        component: _components_nuevo_usuario_nuevo_usuario_component__WEBPACK_IMPORTED_MODULE_25__["NuevoUsuarioComponent"]
+        component: _components_nuevo_usuario_nuevo_usuario_component__WEBPACK_IMPORTED_MODULE_28__["NuevoUsuarioComponent"],
+        canActivate: [_app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]]
     }
 ];
 let AppModule = class AppModule {
@@ -698,36 +740,41 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
-            _components_sidenav_sidenav_component__WEBPACK_IMPORTED_MODULE_8__["SidenavComponent"],
-            _components_archivos_archivos_component__WEBPACK_IMPORTED_MODULE_9__["ArchivosComponent"],
-            _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-            _components_pagina_principal_pagina_principal_component__WEBPACK_IMPORTED_MODULE_11__["PaginaPrincipalComponent"],
-            _components_configuraciones_configuraciones_component__WEBPACK_IMPORTED_MODULE_12__["ConfiguracionesComponent"],
-            _components_paginas_paginas_component__WEBPACK_IMPORTED_MODULE_13__["PaginasComponent"],
-            _components_nueva_pagina_html_nueva_pagina_html_component__WEBPACK_IMPORTED_MODULE_14__["NuevaPaginaHtmlComponent"],
-            _components_nueva_pagina_posts_nueva_pagina_posts_component__WEBPACK_IMPORTED_MODULE_15__["NuevaPaginaPostsComponent"],
-            _components_posts_posts_component__WEBPACK_IMPORTED_MODULE_16__["PostsComponent"],
-            _components_nuevo_post_nuevo_post_component__WEBPACK_IMPORTED_MODULE_17__["NuevoPostComponent"],
-            _components_comentarios_comentarios_component__WEBPACK_IMPORTED_MODULE_18__["ComentariosComponent"],
-            _components_menus_menus_component__WEBPACK_IMPORTED_MODULE_19__["MenusComponent"],
-            _components_nuevo_menu_nuevo_menu_component__WEBPACK_IMPORTED_MODULE_20__["NuevoMenuComponent"],
-            _components_nuevo_tema_nuevo_tema_component__WEBPACK_IMPORTED_MODULE_21__["NuevoTemaComponent"],
-            _components_temas_temas_component__WEBPACK_IMPORTED_MODULE_22__["TemasComponent"],
-            _components_seguridad_seguridad_component__WEBPACK_IMPORTED_MODULE_23__["SeguridadComponent"],
-            _components_nuevo_rol_nuevo_rol_component__WEBPACK_IMPORTED_MODULE_24__["NuevoRolComponent"],
-            _components_nuevo_usuario_nuevo_usuario_component__WEBPACK_IMPORTED_MODULE_25__["NuevoUsuarioComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
+            _components_sidenav_sidenav_component__WEBPACK_IMPORTED_MODULE_11__["SidenavComponent"],
+            _components_archivos_archivos_component__WEBPACK_IMPORTED_MODULE_12__["ArchivosComponent"],
+            _components_login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"],
+            _components_pagina_principal_pagina_principal_component__WEBPACK_IMPORTED_MODULE_14__["PaginaPrincipalComponent"],
+            _components_configuraciones_configuraciones_component__WEBPACK_IMPORTED_MODULE_15__["ConfiguracionesComponent"],
+            _components_paginas_paginas_component__WEBPACK_IMPORTED_MODULE_16__["PaginasComponent"],
+            _components_nueva_pagina_html_nueva_pagina_html_component__WEBPACK_IMPORTED_MODULE_17__["NuevaPaginaHtmlComponent"],
+            _components_nueva_pagina_posts_nueva_pagina_posts_component__WEBPACK_IMPORTED_MODULE_18__["NuevaPaginaPostsComponent"],
+            _components_posts_posts_component__WEBPACK_IMPORTED_MODULE_19__["PostsComponent"],
+            _components_nuevo_post_nuevo_post_component__WEBPACK_IMPORTED_MODULE_20__["NuevoPostComponent"],
+            _components_comentarios_comentarios_component__WEBPACK_IMPORTED_MODULE_21__["ComentariosComponent"],
+            _components_menus_menus_component__WEBPACK_IMPORTED_MODULE_22__["MenusComponent"],
+            _components_nuevo_menu_nuevo_menu_component__WEBPACK_IMPORTED_MODULE_23__["NuevoMenuComponent"],
+            _components_nuevo_tema_nuevo_tema_component__WEBPACK_IMPORTED_MODULE_24__["NuevoTemaComponent"],
+            _components_temas_temas_component__WEBPACK_IMPORTED_MODULE_25__["TemasComponent"],
+            _components_seguridad_seguridad_component__WEBPACK_IMPORTED_MODULE_26__["SeguridadComponent"],
+            _components_nuevo_rol_nuevo_rol_component__WEBPACK_IMPORTED_MODULE_27__["NuevoRolComponent"],
+            _components_nuevo_usuario_nuevo_usuario_component__WEBPACK_IMPORTED_MODULE_28__["NuevoUsuarioComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(routes),
-            _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_5__["CKEditorModule"],
-            ng2_ace_editor__WEBPACK_IMPORTED_MODULE_6__["AceEditorModule"]
+            _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_7__["CKEditorModule"],
+            ng2_ace_editor__WEBPACK_IMPORTED_MODULE_8__["AceEditorModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"]
             // MaterializeModule
         ],
-        providers: [],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+        providers: [
+            _app_guards_necesita_auth_guard__WEBPACK_IMPORTED_MODULE_9__["NecesitaAuthGuard"]
+        ],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]]
     })
 ], AppModule);
 
@@ -742,7 +789,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".boton-archivo {\r\n    margin-right: 6px !important;\r\n}\r\n\r\n#subir {\r\n    margin-top: 1rem;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hcmNoaXZvcy9hcmNoaXZvcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksNEJBQTRCO0FBQ2hDOztBQUVBO0lBQ0ksZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9hcmNoaXZvcy9hcmNoaXZvcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJvdG9uLWFyY2hpdm8ge1xyXG4gICAgbWFyZ2luLXJpZ2h0OiA2cHggIWltcG9ydGFudDtcclxufVxyXG5cclxuI3N1YmlyIHtcclxuICAgIG1hcmdpbi10b3A6IDFyZW07XHJcbn0iXX0= */"
+module.exports = ".boton-archivo {\r\n    margin-right: 6px !important;\r\n}\r\n\r\n#subir {\r\n    margin-top: 1rem;\r\n}\r\n\r\na {\r\n    cursor: pointer;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9hcmNoaXZvcy9hcmNoaXZvcy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksNEJBQTRCO0FBQ2hDOztBQUVBO0lBQ0ksZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksZUFBZTtBQUNuQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXJjaGl2b3MvYXJjaGl2b3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib3Rvbi1hcmNoaXZvIHtcclxuICAgIG1hcmdpbi1yaWdodDogNnB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbiNzdWJpciB7XHJcbiAgICBtYXJnaW4tdG9wOiAxcmVtO1xyXG59XHJcblxyXG5hIHtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxufSJdfQ== */"
 
 /***/ }),
 
@@ -758,35 +805,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArchivosComponent", function() { return ArchivosComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/materialize-css/dist/js/materialize.js");
+/* harmony import */ var materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__);
+
+
 
 
 let ArchivosComponent = class ArchivosComponent {
-    constructor() {
-        this.archivos = [
-            {
-                nombre: 'paradise',
-                ruta: 'paradise_ocean_tropical_blue_palm_beach_coast_sea_emerald_5420x3613.jpg',
-                tipo: 'imagen',
-                shortcut: { tipo: 'imagen', id: '1nf91837neeyjh' },
-                miniatura: 'paradise_ocean_tropical_blue_palm_beach_coast_sea_emerald_5420x3613.jpg'
-            },
-            {
-                nombre: 'cancion',
-                ruta: 'hola.mp3',
-                tipo: 'audio',
-                extension: 'mp3'
-            },
-            {
-                nombre: 'graduacion',
-                ruta: 'graduacion.mp4',
-                tipo: 'video',
-                miniatura: 'lobito.jpg'
-            }
-        ];
+    constructor(http) {
+        this.http = http;
+        this.URL_BACKEND = 'http://localhost:3333/api/';
+        this.obtenerArchivos();
     }
     ngOnInit() {
+        var elems = document.querySelectorAll('.modal');
+        this.instanciaModal = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__["Modal"].init(elems, {});
+    }
+    obtenerArchivos() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.archivos = yield this.http.get(this.URL_BACKEND + 'archivos').toPromise();
+        });
+    }
+    cambio(event) {
+        this.archivoSubir = event.target.files[0];
+    }
+    subirArchivo() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let formData = new FormData();
+            formData.append("archivo", this.archivoSubir, this.archivoSubir.name);
+            yield this.http.post(this.URL_BACKEND + 'archivos', formData).toPromise();
+            let input = document.getElementById('archivo');
+            input.value = null;
+            this.obtenerArchivos();
+        });
+    }
+    eliminarArchivo(id) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.http.delete(this.URL_BACKEND + 'archivos/' + id).toPromise();
+            this.obtenerArchivos();
+        });
+    }
+    mostrarModal(codigo) {
+        this.codigoModal = codigo;
+        this.instanciaModal[0].open();
     }
 };
+ArchivosComponent.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
 ArchivosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-archivos',
@@ -928,13 +995,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/api.service */ "./src/app/services/api.service.ts");
+
+
 
 
 let LoginComponent = class LoginComponent {
-    constructor() { }
+    constructor(api, router) {
+        this.api = api;
+        this.router = router;
+        this.correo = '';
+        this.contrasena = '';
+    }
     ngOnInit() {
     }
+    login() {
+        console.log(this.correo, this.contrasena);
+        this.api.login(this.correo, this.contrasena)
+            .subscribe(r => {
+            console.log('status: ', r);
+            if (r['status'] == 1) {
+                this.router.navigateByUrl('/admin/archivos');
+            }
+        }, r => console.error(r.error.error));
+    }
 };
+LoginComponent.ctorParameters = () => [
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
 LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-login',
@@ -1552,18 +1642,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SidenavComponent", function() { return SidenavComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/materialize-css/dist/js/materialize.js");
-/* harmony import */ var materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! materialize-css/dist/js/materialize */ "./node_modules/materialize-css/dist/js/materialize.js");
+/* harmony import */ var materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/api.service */ "./src/app/services/api.service.ts");
+
+
 
 
 
 let SidenavComponent = class SidenavComponent {
-    constructor() {
+    constructor(api, router) {
+        this.api = api;
+        this.router = router;
         this.visibilidad = true;
     }
     ngAfterViewInit() {
-        let instanceSidenav = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_2__["Sidenav"].init(this.sideNav.nativeElement, {});
-        let instanceDropdown = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_2__["Dropdown"].init(this.dropdown1.nativeElement, {});
+        let instanceSidenav = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__["Sidenav"].init(this.sideNav.nativeElement, {});
+        let instanceDropdown = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__["Dropdown"].init(this.dropdown1.nativeElement, {});
     }
     ngOnInit() {
     }
@@ -1571,11 +1667,20 @@ let SidenavComponent = class SidenavComponent {
         const full = document.querySelector('.sidenav-trigger');
         const style = getComputedStyle(full);
         if (style.display != 'none') {
-            let instance = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_2__["Sidenav"].getInstance(this.sideNav.nativeElement);
+            let instance = materialize_css_dist_js_materialize__WEBPACK_IMPORTED_MODULE_3__["Sidenav"].getInstance(this.sideNav.nativeElement);
             instance.close();
         }
     }
+    logout() {
+        this.api.logout().subscribe(r => {
+            this.router.navigateByUrl('/admin');
+        });
+    }
 };
+SidenavComponent.ctorParameters = () => [
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('sidenav', { static: false })
 ], SidenavComponent.prototype, "sideNav", void 0);
@@ -1631,6 +1736,119 @@ TemasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./temas.component.css */ "./src/app/components/temas/temas.component.css")]
     })
 ], TemasComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/guards/necesita-auth.guard.ts":
+/*!***********************************************!*\
+  !*** ./src/app/guards/necesita-auth.guard.ts ***!
+  \***********************************************/
+/*! exports provided: NecesitaAuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NecesitaAuthGuard", function() { return NecesitaAuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
+
+
+
+
+let NecesitaAuthGuard = class NecesitaAuthGuard {
+    constructor(api, router) {
+        this.api = api;
+        this.router = router;
+    }
+    canActivate(next, state) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const redirectUrl = next['_routerState']['url'];
+            console.log(yield this.api.isLogged());
+            if (yield this.api.isLogged()) {
+                return true;
+            }
+            this.router.navigateByUrl(this.router.createUrlTree(['/admin/login'], {
+                queryParams: {
+                    redirectUrl
+                }
+            }));
+            return false;
+        });
+    }
+};
+NecesitaAuthGuard.ctorParameters = () => [
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+NecesitaAuthGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], NecesitaAuthGuard);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/api.service.ts":
+/*!*****************************************!*\
+  !*** ./src/app/services/api.service.ts ***!
+  \*****************************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let ApiService = class ApiService {
+    constructor(http) {
+        this.http = http;
+        this.URL_BACKEND = 'http://localhost:3333/api/';
+    }
+    login(correo, contrasena) {
+        return this.http.post(this.URL_BACKEND + 'login', {
+            correo: correo,
+            contrasena: contrasena
+        }, {
+            withCredentials: true
+        });
+    }
+    isLogged() {
+        // return new Promise(resolve => {
+        //   this.http.get(this.URL_BACKEND + 'logged', {
+        //     withCredentials: true
+        //   }).subscribe(
+        //     r => {
+        //       resolve(r)
+        //     }
+        //   )
+        // })
+        return true;
+    }
+    logout() {
+        return this.http.get(this.URL_BACKEND + 'logout', {
+            withCredentials: true
+        });
+    }
+};
+ApiService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], ApiService);
 
 
 
@@ -1697,7 +1915,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\angular\gammu\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\gammu\client\src\main.ts */"./src/main.ts");
 
 
 /***/ })

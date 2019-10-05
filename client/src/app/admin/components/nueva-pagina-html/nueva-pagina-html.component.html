@@ -1,0 +1,75 @@
+<div class="main">
+    <h3>Nueva página</h3>
+    
+    <br>
+    <div class="row">
+        <div class="col s12">
+            <ckeditor (change)="onChange($event)" [editor]="Editor" [config]="editorConfig"></ckeditor>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="input-field">
+                <input id="titulo-pagina" type="text" class="validate">
+                <label for="titulo-pagina">Título</label>
+            </div>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="input-field">
+                <input id="titulo-pagina-menu" type="text" class="validate">
+                <label for="titulo-pagina-menu">Título en menú</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="input-field">
+                <textarea id="descripcion-pagina" class="materialize-textarea"></textarea>
+                <label for="descripcion-pagina">Descripción</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <label>Palabras clave</label>
+            <div class="chips" (click)="cambioPalabrasclave()"></div>
+        </div>
+        <div class="input-field col s12">
+            <select>
+                <option value="" disabled selected>Seleccione una página</option>
+                <option value="1">Página 1</option>
+                <option value="2">Página 2</option>
+                <option value="3">Página 3</option>
+            </select>
+            <label>Página padre</label>
+        </div>
+        <div class="col s12">
+            <div class="input-field">
+                <input id="url-pagina" type="text" class="validate">
+                <label for="url-pagina">URL</label>
+            </div>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" />
+                <span>Encabezado</span>
+            </label>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" />
+                <span>Pie de página</span>
+            </label>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" />
+                <span>Menú</span>
+            </label>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" />
+                <span>Broadcrumb</span>
+            </label>
+        </div>
+    </div>
+    <a class="btn indigo" name="action">Crear
+        <i class="material-icons left">add</i>
+    </a>
+
+</div>

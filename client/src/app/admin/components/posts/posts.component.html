@@ -1,0 +1,52 @@
+<div class="main">
+    <h3>Posts</h3>
+
+    <div class="row">
+
+        <div class="col">
+            <a routerLink="nuevo" class="btn indigo mb-2" name="action">Post
+                <i class="material-icons left">add</i>
+            </a>
+        </div>
+
+    </div>
+
+    <table>
+        <thead>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Fecha</th>
+            <th>Opciones</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Página 1</td>
+                <td>Marlon Calderón</td>
+                <td>{{ fecha }}</td>
+                <td>
+                    <a href="#"><i class="material-icons indigo-text">edit</i></a>
+                    &nbsp;
+                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Página 2</td>
+                <td>Marlon Calderón</td>
+                <td>{{ fecha }}</td>
+                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
+                    &nbsp;
+                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Página 3</td>
+                <td>Marlon Calderón</td>
+                <td>{{ fecha }}</td>
+                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
+                    &nbsp;
+                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

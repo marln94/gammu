@@ -13,11 +13,11 @@ export class AppComponent  {
   isLogged = false;
 
   constructor(public api:ApiService, private router:Router) {
-    router.events.forEach( async event => {
-      if (event instanceof NavigationStart) {
-        this.isLogged = await this.api.isLogged();
-      }
-    })
+    // router.events.forEach( async event => {
+    //   if (event instanceof NavigationStart) {
+    //     this.isLogged = await this.api.isLogged();
+    //   }
+    // })
   }
 
 }

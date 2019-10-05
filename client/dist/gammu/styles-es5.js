@@ -639,9 +639,9 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\angular\gammu\src\styles.css */"./src/styles.css");
-__webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\angular\gammu\node_modules\materialize-css\dist\css\materialize.css */"./node_modules/materialize-css/dist/css/materialize.css");
-module.exports = __webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\angular\gammu\node_modules\@mdi\font\css\materialdesignicons.min.css */"./node_modules/@mdi/font/css/materialdesignicons.min.css");
+__webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\gammu\client\src\styles.css */"./src/styles.css");
+__webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\gammu\client\node_modules\materialize-css\dist\css\materialize.css */"./node_modules/materialize-css/dist/css/materialize.css");
+module.exports = __webpack_require__(/*! E:\Office_Documents\UNAH\Desarrollo Web\gammu\client\node_modules\@mdi\font\css\materialdesignicons.min.css */"./node_modules/@mdi/font/css/materialdesignicons.min.css");
 
 
 /***/ })

@@ -1,0 +1,7 @@
+<app-sidenav *ngIf="isLogged"></app-sidenav>
+
+<app-login *ngIf="!isLogged"></app-login>
+
+<main>
+    <router-outlet></router-outlet>
+</main>

@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const archivo = require('../models/archivo');
 const mongoose = require('mongoose');
 const multer = require('multer')
 const storage = multer.diskStorage({
-	destination: './public/uploads',
+    destination: './public/uploads',
 	filename: (req, file, cb) => {
-		cb(null, Date.now() + '-' + file.originalname)
+        cb(null, Date.now() + '-' + file.originalname)
 	}
 })
 const upload = multer({storage: storage})
+
+const archivo = require('../models/archivo');
 
 router.get('/', async function(req, res) {
     try {

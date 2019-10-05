@@ -20,16 +20,15 @@ export class ApiService {
   }
 
   isLogged() {
-    // return new Promise(resolve => {
-    //   this.http.get(this.URL_BACKEND + 'logged', {
-    //     withCredentials: true
-    //   }).subscribe(
-    //     r => {
-    //       resolve(r)
-    //     }
-    //   )
-    // })
-    return true
+    return new Promise(resolve => {
+      this.http.get(this.URL_BACKEND + 'logged', {
+        withCredentials: true
+      }).subscribe(
+        r => {
+          resolve(r)
+        }
+      )
+    })
   }
 
   logout() {

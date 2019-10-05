@@ -9,7 +9,9 @@ const database = require('./modules/database');
 const usuario = require('./models/usuario');
 
 const archivosRouter = require('./routers/archivos')
-
+const encabezadosRouter = require('./routers/encabezados')
+const piesRouter = require('./routers/pies')
+const paginasPrincipalesRouter = require('./routers/paginasPrincipales')
 
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // support encoded bodies
@@ -31,14 +33,17 @@ app.listen(3333, function () {
 });
 
 app.use('/api/archivos', archivosRouter)
+app.use('/api/encabezados', encabezadosRouter)
+app.use('/api/pies', piesRouter)
+app.use('/api/paginas-principales', paginasPrincipalesRouter)
 
 app.post("/api/login", function (req, res) {
-    console.log(req.body.correo, req.body.contrasena);
+    // console.log(req.body.correo, req.body.contrasena);
 
 
     usuario.find({ correo: req.body.correo, contrasena: req.body.contrasena })
         .then(data => {
-            console.log(data);
+            // console.log(data);
 
             if (data.length == 1) {//Significa que si encontro un usuario con las credenciales indicadas
                 //Establecer las variables de sesion
@@ -48,7 +53,7 @@ app.post("/api/login", function (req, res) {
                 req.session.codigoTipoUsuario = data[0].tipoUsuario;
 
                 // req.session.save()
-                console.log('save ', req.session);
+                // console.log('save ', req.session);
 
                 res.send({ status: 1, mensaje: "Usuario autenticado con éxito", usuario: data[0] });
             } else {
