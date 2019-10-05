@@ -12,6 +12,7 @@ const archivosRouter = require('./routers/archivos')
 const encabezadosRouter = require('./routers/encabezados')
 const piesRouter = require('./routers/pies')
 const paginasPrincipalesRouter = require('./routers/paginasPrincipales')
+const configuracionesRouter = require('./routers/configuraciones')
 
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // support encoded bodies
@@ -36,6 +37,7 @@ app.use('/api/archivos', archivosRouter)
 app.use('/api/encabezados', encabezadosRouter)
 app.use('/api/pies', piesRouter)
 app.use('/api/paginas-principales', paginasPrincipalesRouter)
+app.use('/api/configuraciones', configuracionesRouter)
 
 app.post("/api/login", function (req, res) {
     // console.log(req.body.correo, req.body.contrasena);

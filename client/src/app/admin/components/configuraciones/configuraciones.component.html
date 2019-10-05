@@ -7,18 +7,19 @@
                 <div class="">
                     <!-- <label <span class="card-title">Cambiar título de la página</span> label> -->
                     <div class="input-field">
-                        <input id="titulo-pagina" type="text" class="validate">
+                        <input id="titulo-pagina" [(ngModel)]="titulo" type="text" class="validate">
                         <label for="titulo-pagina">Título</label>
                     </div>
 
                     <!-- <label <span class="card-title">Cambiar descripción de la página</span> label> -->
                     <div class="input-field">
-                        <textarea id="descripcion-pagina" class="materialize-textarea"></textarea>
+                        <textarea id="descripcion-pagina" [(ngModel)]="descripcion"
+                            class="materialize-textarea"></textarea>
                         <label for="descripcion-pagina">Descripción</label>
                     </div>
 
                     <label class="card-title">Palabras clave</label>
-                    <div class="chips" (click)="cambioPalabrasclave()"></div>
+                    <div class="chips"></div>
                 </div>
             </div>
         </div>
@@ -30,7 +31,7 @@
                     <div class="file-field input-field">
                         <div class="btn indigo">
                             <span>Favicon</span>
-                            <input type="file" accept="image/*">
+                            <input type="file" accept="image/*" (change)="cambioFavicon($event)">
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
@@ -48,7 +49,7 @@
                     <div class="file-field input-field">
                         <div class="btn indigo">
                             <span>logo</span>
-                            <input type="file" accept="image/*">
+                            <input type="file" accept="image/*" (change)="cambioLogo($event)">
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
@@ -64,38 +65,28 @@
                 <div class="">
                     <h5 class="card-title">CSS personalizado</h5>
 
-                    <div ace-editor 
-                        [(text)]="css"
-                        [mode]="'css'" 
-                        [theme]="'dracula'" 
-                        [options]="options"
-                        [readOnly]="false" 
-                        [autoUpdateContent]="true" 
-                        [durationBeforeCallback]="1000" 
-                        (textChanged)="onChange($event)" 
+                    <div ace-editor [(text)]="css" [mode]="'css'" [theme]="'dracula'" [options]="options"
+                        [readOnly]="false" [autoUpdateContent]="true" [durationBeforeCallback]="1000"
                         style="min-height: 200px; width:100%; overflow: auto;"></div>
                 </div>
             </div>
         </div>
 
         <div class="col s12 m12 l12 editor">
+            <div class="">
                 <div class="">
-                    <div class="">
-                        <h5 class="card-title">Javascript personalizado</h5>
-    
-                        <div ace-editor 
-                            [(text)]="javascript"
-                            [mode]="'javascript'" 
-                            [theme]="'dracula'" 
-                            [options]="options"
-                            [readOnly]="false" 
-                            [autoUpdateContent]="true" 
-                            [durationBeforeCallback]="1000" 
-                            (textChanged)="onChange($event)" 
-                            style="min-height: 200px; width:100%; overflow: auto;"></div>
-                    </div>
+                    <h5 class="card-title">Javascript personalizado</h5>
+
+                    <div ace-editor [(text)]="javascript" [mode]="'javascript'" [theme]="'dracula'" [options]="options"
+                        [readOnly]="false" [autoUpdateContent]="true" [durationBeforeCallback]="1000"
+                        style="min-height: 200px; width:100%; overflow: auto;"></div>
                 </div>
             </div>
+        </div>
+
+        <div class="col s12 center">
+            <button class="btn indigo" (click)=guardar()>Guardar</button>
+        </div>
 
     </div>
 </div>
