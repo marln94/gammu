@@ -4,6 +4,7 @@ var esquema = new mongoose.Schema(
     {
         html: String,
         tipo: String,
+        categoria: String,
         titulo: String,
         tituloMenu: String,
         descripcion: String,

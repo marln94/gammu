@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as moment from "moment";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -9,11 +10,25 @@ import * as moment from "moment";
 })
 export class PostsComponent implements OnInit {
 
-  fecha = moment().format('DD/MM/YYYY HH:mm')
+  URL_BACKEND = 'http://localhost:3333/api/'
 
-  constructor() { }
+  posts = []
+
+  constructor(private http:HttpClient) { 
+    this.http.get(this.URL_BACKEND + 'posts').toPromise()
+      .then(respuesta => {
+        this.posts = respuesta
+        console.log(this.posts);
+        
+      })
+  }
 
   ngOnInit() {
+  }
+
+  async eliminar(id) {
+    let respuesta = await this.http.delete(this.URL_BACKEND + 'posts/' + id).toPromise()
+    this.posts = await this.http.get(this.URL_BACKEND + 'posts').toPromise()
   }
 
 }

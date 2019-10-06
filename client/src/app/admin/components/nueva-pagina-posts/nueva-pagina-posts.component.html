@@ -1,16 +1,67 @@
 <div class="main">
     <h3>Nueva página</h3>
 
-    <div class="input-field">
-        <select>
-            <option value="" disabled selected>Seleccione una caegoría</option>
-            <option value="1">Cateogría 1</option>
-            <option value="2">Cateogría 2</option>
-            <option value="3">Cateogría 3</option>
-        </select>
+    <div class="row">
+        <div class="input-field col s12">
+            <select [(ngModel)]="categoria">
+                <option value="" disabled selected>Seleccione una categoría</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</option>
+            </select>
+        </div>
+
+
+        <div class="col s12 m6 l6">
+            <div class="input-field">
+                <input id="titulo-pagina" [(ngModel)]="titulo" type="text" class="validate">
+                <label for="titulo-pagina">Título</label>
+            </div>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="input-field">
+                <input id="titulo-pagina-menu" [(ngModel)]="tituloMenu" type="text" class="validate">
+                <label for="titulo-pagina-menu">Título en menú</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="input-field">
+                <textarea id="descripcion-pagina" [(ngModel)]="descripcion" class="materialize-textarea"></textarea>
+                <label for="descripcion-pagina">Descripción</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <label>Palabras clave</label>
+            <div class="chips"></div>
+        </div>
+        <div class="col s12">
+            <div class="input-field">
+                <input id="url-pagina" [(ngModel)]="url" type="text" class="validate">
+                <label for="url-pagina">URL</label>
+            </div>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" [(ngModel)]="encabezado" />
+                <span>Encabezado</span>
+            </label>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" [(ngModel)]="pie" />
+                <span>Pie de página</span>
+            </label>
+        </div>
+        <div class="col checks">
+            <label>
+                <input type="checkbox" [(ngModel)]="menu" />
+                <span>Menú</span>
+            </label>
+        </div>
+
+
     </div>
 
-    <a class="btn indigo" name="action">Crear
+
+    <a class="btn indigo" (click)="crear()">Crear
         <i class="material-icons left">add</i>
     </a>
 </div>

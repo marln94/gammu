@@ -22,6 +22,7 @@ import { TemasComponent } from './components/temas/temas.component';
 import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { NuevoRolComponent } from './components/nuevo-rol/nuevo-rol.component';
 import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.component';
+import { CategoriasComponent } from "./components/categorias/categorias.component";
 
 
 const routes: Routes = [
@@ -126,6 +127,11 @@ const routes: Routes = [
             {
                 path: 'seguridad/nuevo-usuario',
                 component: NuevoUsuarioComponent,
+                canActivate: [NecesitaAuthGuard]
+            },
+            {
+                path: 'categorias',
+                component: CategoriasComponent,
                 canActivate: [NecesitaAuthGuard]
             }
         ]

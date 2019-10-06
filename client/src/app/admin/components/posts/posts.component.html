@@ -8,6 +8,9 @@
                 <i class="material-icons left">add</i>
             </a>
         </div>
+        <div class="col right">
+            <a routerLink="/admin/categorias" class="btn orange mb-2" name="action">Categorías</a>
+        </div>
 
     </div>
 
@@ -15,36 +18,18 @@
         <thead>
             <th>Título</th>
             <th>Autor</th>
+            <th>Categoría</th>
             <th>Fecha</th>
             <th>Opciones</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Página 1</td>
-                <td>Marlon Calderón</td>
-                <td>{{ fecha }}</td>
+            <tr *ngFor="let post of posts">
+                <td>{{post.titulo}}</td>
+                <td>TODO</td>
+                <td>{{post.categoria}}</td>
+                <td>{{ post.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
                 <td>
-                    <a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Página 2</td>
-                <td>Marlon Calderón</td>
-                <td>{{ fecha }}</td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Página 3</td>
-                <td>Marlon Calderón</td>
-                <td>{{ fecha }}</td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
+                    <a class="btn-flat" (click)="eliminar(post._id)"><i class="material-icons indigo-text">delete</i></a>
                 </td>
             </tr>
         </tbody>

@@ -8,7 +8,7 @@
         </div>
         <div class="col s12">
             <div class="input-field">
-                <input id="titulo-post" type="text" class="validate">
+                <input id="titulo-post" type="text" [(ngModel)]="titulo" class="validate">
                 <label for="titulo-post">Título</label>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <div class="file-field input-field">
                 <div class="btn indigo">
                     <span>Imagen</span>
-                    <input type="file" accept="image/*">
+                    <input type="file" (change)="cambio($event)" accept="image/*">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
@@ -25,23 +25,21 @@
         </div>
 
         <div class="input-field col s12 m6">
-            <select>
+            <select [(ngModel)]="categoria">
                 <option value="" disabled selected>Seleccione una categoría</option>
-                <option value="1">Categoría 1</option>
-                <option value="2">Categoría 2</option>
-                <option value="3">Categoría 3</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</option>
             </select>
             <label>Categoría</label>
         </div>
         <div class="col s12 m6">
             <label>
-                <input type="checkbox" />
+                <input type="checkbox" [(ngModel)]="permiteComentarios" />
                 <span>Permitir comentarios</span>
             </label>
         </div>
 
     </div>
-    <a class="btn indigo" name="action">Crear
+    <a class="btn indigo" (click)="guardar()">Crear
         <i class="material-icons left">add</i>
     </a>
 </div>

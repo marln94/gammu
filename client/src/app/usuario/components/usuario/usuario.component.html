@@ -9,8 +9,22 @@
     <!-- TODO menú -->
 
     <main>
-        <div *ngIf="pagina" [innerHTML]="pagina.html">
-
+        <div *ngIf="pagina && pagina.tipo == 'html'" [innerHTML]="pagina.html"></div>
+        <div *ngIf="pagina && pagina.tipo == 'posts'" class="row">
+            <div class="col s12 m8 offset-m2" *ngFor="let post of pagina.posts">
+                <div class="card">
+                    <div class="card-image">
+                        <img [src]="post.imagen || '/assets/upload/default.jpg'">
+                        <span class="card-title">{{post.titulo}}</span>
+                    </div>
+                    <div class="card-content" [innerHTML]="post.html">
+                        
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div *ngIf="!esPrincipal && !pagina">
             Página no registrada

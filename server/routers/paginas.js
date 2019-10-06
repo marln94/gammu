@@ -42,10 +42,22 @@ router.put('/toggle/:id', async function (req, res) {
 
 router.get('/url/:url', async function (req, res) {
     try {
-        let pag = await pagina.find({
-            url: req.params.url,
-            estado: 'activa'
-        })
+        let pag = await pagina.aggregate([
+            {
+                $match: {
+                    url: req.params.url,
+                    estado: 'activa'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'posts',
+                    localField: 'categoria',
+                    foreignField: 'categoria',
+                    as: 'posts'
+                }
+            }
+        ])
         res.json(pag)
     } catch (error) {
         console.error(error);
@@ -66,6 +78,7 @@ router.post('/', async function (req, res) {
             encabezado: req.body.encabezado,
             pie: req.body.pie,
             menu: req.body.menu,
+            categoria: req.body.categoria
         })
 
         let respuesta = await a.save()

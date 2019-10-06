@@ -43,18 +43,20 @@ export class NuevaPaginaHtmlComponent implements OnInit {
     this.htmlData = editor.getData();
   }
 
-  cambioPalabrasclave(p) {
-    let elem = document.querySelector('.chips');
-    let palabrasClave = M.Chips.getInstance(elem);
-    console.log(palabrasClave.chipsData)
-  }
 
   async crear() {
     let elem = document.querySelector('.chips');
     let palabrasClave = M.Chips.getInstance(elem);
 
+    if (this.htmlData == '' || this.titulo == '' || this.url == '') {
+      await swal.fire({
+        title: 'Error',
+        text: 'Campos incompletos'
+      })
+      return
+    }
+
     let formData = {}
-    
     
     formData['html'] = this.htmlData
     formData['titulo'] = this.titulo
@@ -70,6 +72,7 @@ export class NuevaPaginaHtmlComponent implements OnInit {
     formData['encabezado'] = this.encabezado
     formData['pie'] = this.pie
     formData['menu'] = this.menu
+    formData['tipo'] = 'html'
 
     let respuesta = await this.http.post(this.URL_BACKEND + 'paginas', formData).toPromise()
     await swal.fire({

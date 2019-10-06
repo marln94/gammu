@@ -25,6 +25,7 @@ import { TemasComponent } from './components/temas/temas.component';
 import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { NuevoRolComponent } from './components/nuevo-rol/nuevo-rol.component';
 import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.
     SeguridadComponent,
     NuevoRolComponent,
     NuevoUsuarioComponent,
+    CategoriasComponent,
   ],
   imports: [
     CommonModule,
