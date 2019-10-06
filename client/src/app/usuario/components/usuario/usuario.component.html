@@ -1,10 +1,27 @@
 <div class="body">
-    <app-encabezado></app-encabezado>
-    
+    <div *ngIf="pagina">
+        <app-encabezado *ngIf="pagina.encabezado"></app-encabezado>
+    </div>
+    <div *ngIf="esPrincipal">
+        <app-encabezado></app-encabezado>
+    </div>
+
+    <!-- TODO menú -->
+
     <main>
+        <div *ngIf="pagina" [innerHTML]="pagina.html">
+
+        </div>
+        <div *ngIf="!esPrincipal && !pagina">
+            Página no registrada
+        </div>
         <router-outlet></router-outlet>
-    
     </main>
-    
-    <app-pie></app-pie>
+
+    <div *ngIf="pagina">
+        <app-pie *ngIf="pagina.pie"></app-pie>
+    </div>
+    <div *ngIf="esPrincipal">
+        <app-pie></app-pie>
+    </div>
 </div>

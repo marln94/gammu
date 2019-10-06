@@ -17,6 +17,10 @@ const routes: Routes = [
                 component: PaginaPrincipalComponent
             }
         ]
+    },
+    {
+        path: ':url',
+        component: UsuarioComponent,
     }
 ];
 

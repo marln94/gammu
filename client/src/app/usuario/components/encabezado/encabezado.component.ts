@@ -17,12 +17,9 @@ export class EncabezadoComponent implements OnInit {
   constructor(private http:HttpClient, private sanitization:DomSanitizer) {
     this.http.get(this.URL_BACKEND + 'encabezados').toPromise()
       .then(data => {
-        console.log(data[0]);
         this.texto = data[0].texto
         this.imagen = data[0].imagen.replace(/\\/g, '/')
-        console.log(this.imagen);
         this.imagen = this.sanitization.bypassSecurityTrustStyle(`url(${this.imagen})`);
-        console.log(this.imagen);
         
       })
   }
