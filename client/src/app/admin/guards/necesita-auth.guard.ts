@@ -12,15 +12,20 @@ export class NecesitaAuthGuard implements CanActivate {
   async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const redirectUrl = next['_routerState']['url'];
 
-    console.log(await this.api.isLogged());
+    let usuario = await this.api.getUsuario()
+
     if (await this.api.isLogged()) {
-      
-      return true;
+      if (usuario.tipoUsuario == 'admin'){
+        return true;
+      } else {
+        this.router.navigate(['/'])
+        return false
+      }      
     }
 
     this.router.navigateByUrl(
       this.router.createUrlTree(
-        ['/admin'], {
+        ['/usuario/login'], {
         queryParams: {
           redirectUrl
         }

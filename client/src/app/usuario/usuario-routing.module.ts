@@ -6,6 +6,7 @@ import { ContenidoComponent } from "./components/contenido/contenido.component";
 import { EncabezadoComponent } from "./components/encabezado/encabezado.component";
 import { PieComponent } from "./components/pie/pie.component";
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
+import { LoginComponent } from "./components/login/login.component";
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
     {
         path: ':url',
         component: UsuarioComponent,
+    },
+    {
+        path: 'usuario/login',
+        component: LoginComponent
     }
 ];
 

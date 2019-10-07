@@ -9,36 +9,12 @@
             <th>Opciones</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Post 1</td>
-                <td>Marlon Calderón</td>
-                <td>{{ fecha }}</td>
+            <tr *ngFor="let post of posts">
+                <td>{{post.titulo}}</td>
+                <td>{{post.comentarios.usuario.nombre}} {{post.comentarios.usuario.apellido}}</td>
+                <td>{{ post.comentarios.fecha | date:'d MMMM, yyyy HH:mm' }}</td>
                 <td>
-                    <a href="#"><i class="material-icons indigo-text">remove_red_eye</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">error</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Post 2</td>
-                <td>Marlon Calderón</td>
-                <td>{{ fecha }}</td>
-                <td>
-                    <a href="#"><i class="material-icons indigo-text">remove_red_eye</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">error</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Post 3</td>
-                <td>Marlon Calderón</td>
-                <td>{{ fecha }}</td>
-                <td>
-                    <a href="#"><i class="material-icons indigo-text">remove_red_eye</i></a>
+                    <a (click)="mostrarModal(post.comentarios.texto)"><i class="material-icons indigo-text">remove_red_eye</i></a>
                     &nbsp;
                     <a href="#"><i class="material-icons indigo-text">error</i></a>
                     &nbsp;
@@ -47,4 +23,14 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Comentario</h4>
+        <p>{{ textoModal }}</p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close btn orange">Cerrar</a>
+    </div>
 </div>

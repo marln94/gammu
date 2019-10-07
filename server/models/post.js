@@ -7,7 +7,9 @@ var esquema = new mongoose.Schema(
         imagen: String,
         categoria: String,
         permiteComentarios: Boolean,
-        fecha: Date
+        fecha: Date,
+        comentarios: Array,
+        shortcut: String
     }
 );
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as M from "materialize-css/dist/js/materialize";
 
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-archivos',
@@ -37,6 +38,14 @@ export class ArchivosComponent implements OnInit {
   }
 
   async subirArchivo() {
+    if (!this.archivoSubir) {
+      await swal.fire({
+        title: 'Error',
+        text: 'Seleccione un archivo'
+      })
+      return
+    }
+
     let formData = new FormData()
     formData.append("archivo", this.archivoSubir, this.archivoSubir.name)
     await this.http.post(this.URL_BACKEND + 'archivos', formData).toPromise()

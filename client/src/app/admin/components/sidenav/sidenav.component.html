@@ -11,9 +11,10 @@
             </a>
             <a routerLink="/admin" class="brand-logo">Logo</a>
             <ul id="nav-mobile" class="right">
-                <li><a #dropdown1 class="dropdown-trigger" href="#!" data-target="dropdown1">Usuario<i
-                            class="material-icons right">arrow_drop_down</i></a></li>
-            </ul>
+                    <li *ngIf="!isLogged"><a routerLink="/usuario/login">Iniciar sesión</a></li>
+                    <li *ngIf="isLogged">{{usuario.nombre}}  {{usuario.apellido}}</li>
+                    <li *ngIf="isLogged"><a (click)="cerrarSesion()"><i class="material-icons">logout</i></a></li>
+                </ul>
         </div>
     </nav>
 </div>

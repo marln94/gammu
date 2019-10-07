@@ -12,17 +12,20 @@ import { ApiService } from "../../services/api.service";
 export class SidenavComponent implements OnInit {
 
   visibilidad = true;
+  isLogged
+  usuario = {}
 
   @ViewChild('sidenav', {static: false}) sideNav: any;
-  @ViewChild('dropdown1', {static: false}) dropdown1: any;
 
   constructor(private api:ApiService, private router:Router) { 
-    
+    this.api.isLogged().then(data => {
+      this.isLogged = data
+      this.api.getUsuario().then(data => this.usuario = data)
+    })
   }
 
   ngAfterViewInit() {
     let instanceSidenav = M.Sidenav.init(this.sideNav.nativeElement, {});
-    let instanceDropdown = M.Dropdown.init(this.dropdown1.nativeElement, {});
   }
 
   ngOnInit() {
@@ -37,9 +40,9 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  logout() {
+  cerrarSesion() {
     this.api.logout().subscribe(r => {
-      this.router.navigateByUrl('/admin')
+      this.router.navigateByUrl('/')
     })
   }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment'
+import { HttpClient } from '@angular/common/http';
+
+import * as M from "materialize-css/dist/js/materialize";
 
 @Component({
   selector: 'app-comentarios',
@@ -8,11 +10,27 @@ import * as moment from 'moment'
 })
 export class ComentariosComponent implements OnInit {
 
-  fecha = moment().format('DD/MM/YYYY HH:mm')
+  URL_BACKEND = 'http://localhost:3333/api/'
 
-  constructor() { }
+  posts = []
+  textoModal = ''
+  instanciaModal
+
+  constructor(private http:HttpClient) { 
+    this.http.get(this.URL_BACKEND + 'posts/todos/comentarios').toPromise()
+      .then(respuesta => {
+        this.posts = respuesta
+      })
+  }
 
   ngOnInit() {
+    var elems = document.querySelectorAll('.modal');
+    this.instanciaModal = M.Modal.init(elems, {});
+  }
+
+  mostrarModal(texto) {
+    this.textoModal = texto
+    this.instanciaModal[0].open()
   }
 
 }

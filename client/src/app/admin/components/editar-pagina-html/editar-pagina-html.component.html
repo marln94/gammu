@@ -1,10 +1,10 @@
 <div class="main">
-    <h3>Nueva página</h3>
+    <h3>Editar página</h3>
     
     <br>
     <div class="row">
         <div class="col s12">
-            <ckeditor (change)="onChange($event)" [editor]="Editor" [config]="editorConfig"></ckeditor>
+            <ckeditor (change)="onChange($event)" [editor]="Editor" [(ngModel)]="htmlData" [config]="editorConfig"></ckeditor>
         </div>
         <div class="col s12 m6 l6 mt-1">
             <div class="input-field">
@@ -53,8 +53,8 @@
             </label>
         </div>
     </div>
-    <a class="btn indigo" name="action" (click)="crear()">Crear
-        <i class="material-icons left">add</i>
+    <a class="btn indigo" name="action" (click)="guardar()">Guardar
+        <i class="material-icons left">save</i>
     </a>
 
 </div>

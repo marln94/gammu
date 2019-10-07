@@ -37,8 +37,8 @@
                     <p class="truncate">{{ archivo.nombre }}</p>
                 </div>
                 <div class="card-action">
-                    <a (click)="mostrarModal(archivo.shortcut)" class="boton-archivo"><i class="material-icons indigo-text"
-                            *ngIf="archivo.tipo.includes('image')">content_copy</i></a>
+                    <a (click)="mostrarModal(archivo.shortcut)" class="boton-archivo"><i
+                            class="material-icons indigo-text">content_copy</i></a>
                     <a [href]="archivo.ruta" class="boton-archivo" target="_blank"><i
                             class="material-icons indigo-text">file_download</i></a>
                     <a (click)="eliminarArchivo(archivo._id)" class="boton-archivo"><i
@@ -53,10 +53,10 @@
 
 <div id="modal1" class="modal">
     <div class="modal-content">
-      <h4>Shortcut del archivo</h4>
-      <p>{{ codigoModal }}</p>
+        <h4>Shortcut del archivo</h4>
+        <p>{{ codigoModal }}</p>
     </div>
     <div class="modal-footer">
-      <a class="modal-close btn orange">Cerrar</a>
+        <a class="modal-close btn orange">Cerrar</a>
     </div>
-  </div>
+</div>

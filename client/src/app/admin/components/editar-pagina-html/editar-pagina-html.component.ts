@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as M from "materialize-css/dist/js/materialize";
 import swal from 'sweetalert2'
+import { delay } from 'q';
 
 @Component({
-  selector: 'app-nueva-pagina-html',
-  templateUrl: './nueva-pagina-html.component.html',
-  styleUrls: ['./nueva-pagina-html.component.css']
+  selector: 'app-editar-pagina-html',
+  templateUrl: './editar-pagina-html.component.html',
+  styleUrls: ['./editar-pagina-html.component.css']
 })
-export class NuevaPaginaHtmlComponent implements OnInit {
+export class EditarPaginaHtmlComponent implements OnInit {
 
   URL_BACKEND = 'http://localhost:3333/api/'
 
@@ -30,11 +31,39 @@ export class NuevaPaginaHtmlComponent implements OnInit {
   pie = false
   menu = false
 
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router: Router, private activeRoute: ActivatedRoute) {
+
+  }
 
   ngOnInit() {
-    let chip = document.querySelector('.chips');
-    let palabrasClave = M.Chips.init(chip, {});
+    this.activeRoute.paramMap.subscribe(async params => {
+      this.http.get(this.URL_BACKEND + 'paginas/' + params.get('id')).toPromise()
+        .then(respuesta => {
+          this.htmlData = respuesta[0].html
+          this.titulo = respuesta[0].titulo
+          this.tituloMenu = respuesta[0].tituloMenu
+          this.descripcion = respuesta[0].descripcion
+          this.url = respuesta[0].url
+          this.encabezado = respuesta[0].encabezado
+          this.pie = respuesta[0].pie
+          this.menu = respuesta[0].menu
+
+          delay(100).then(() => {
+            let chip = document.querySelector('.chips');
+            if (respuesta[0].palabrasClave.length > 0) {
+              let data = respuesta[0].palabrasClave.map(value => ({tag: value}))
+              
+              let palabrasClave = M.Chips.init(chip, {
+                data: data
+              });
+            } else {
+              let palabrasClave = M.Chips.init(chip, {});
+            }
+            M.updateTextFields()
+          })
+        })
+
+    })
   }
 
   public onChange({ editor }: ChangeEvent) {
@@ -42,7 +71,7 @@ export class NuevaPaginaHtmlComponent implements OnInit {
   }
 
 
-  async crear() {
+  async guardar() {
     let elem = document.querySelector('.chips');
     let palabrasClave = M.Chips.getInstance(elem);
 
@@ -55,7 +84,7 @@ export class NuevaPaginaHtmlComponent implements OnInit {
     }
 
     let formData = {}
-    
+
     formData['html'] = this.htmlData
     formData['titulo'] = this.titulo
     formData['tituloMenu'] = this.tituloMenu
@@ -71,13 +100,14 @@ export class NuevaPaginaHtmlComponent implements OnInit {
     formData['pie'] = this.pie
     formData['menu'] = this.menu
     formData['tipo'] = 'html'
-
-    let respuesta = await this.http.post(this.URL_BACKEND + 'paginas', formData).toPromise()
+    
+    let respuesta = await this.http.put(this.URL_BACKEND + 'paginas/' + this.activeRoute.snapshot.params.id, formData).toPromise()
     await swal.fire({
       title: 'Éxito',
-      text: 'La página se creó correctamente',
+      text: 'La página se modificó correctamente',
       type: 'success'
     })
     this.router.navigate(['admin/paginas'])
   }
+
 }

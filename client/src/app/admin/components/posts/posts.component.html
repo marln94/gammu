@@ -19,6 +19,7 @@
             <th>Título</th>
             <th>Autor</th>
             <th>Categoría</th>
+            <th>Shortcut</th>
             <th>Fecha</th>
             <th>Opciones</th>
         </thead>
@@ -27,9 +28,11 @@
                 <td>{{post.titulo}}</td>
                 <td>TODO</td>
                 <td>{{post.categoria}}</td>
+                <td>{{post.shortcut}}</td>
                 <td>{{ post.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
                 <td>
                     <a class="btn-flat" (click)="eliminar(post._id)"><i class="material-icons indigo-text">delete</i></a>
+                    <a class="btn-flat" (click)="modificar(post._id)"><i class="material-icons indigo-text">edit</i></a>
                 </td>
             </tr>
         </tbody>

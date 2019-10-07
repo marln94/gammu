@@ -89,6 +89,28 @@ router.post('/', async function (req, res) {
     }
 })
 
+router.put('/:id', async function (req, res) {
+    try {
+        let a = await pagina.update({_id: req.params.id}, {
+            html: req.body.html,
+            tipo: req.body.tipo,
+            titulo: req.body.titulo,
+            tituloMenu: req.body.tituloMenu,
+            descripcion: req.body.descripcion,
+            palabrasClave: req.body.palabrasClave,
+            estado: 'activa',
+            url: req.body.url,
+            encabezado: req.body.encabezado,
+            pie: req.body.pie,
+            menu: req.body.menu,
+            categoria: req.body.categoria
+        })
+        res.json(a)
+    } catch (error) {
+        console.error(error);
+    }
+})
+
 router.delete('/:id', async function (req, res) {
 })
 

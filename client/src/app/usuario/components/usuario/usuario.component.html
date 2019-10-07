@@ -1,4 +1,15 @@
 <div class="body">
+    <nav>
+        <div class="nav-wrapper indigo">
+            <!-- <a href="#" class="brand-logo">Logo</a> -->
+            <ul id="nav-mobile" class="right">
+                <li *ngIf="!isLogged"><a routerLink="/usuario/login">Iniciar sesión</a></li>
+                <li *ngIf="isLogged">{{usuario.nombre}} {{usuario.apellido}}</li>
+                <li *ngIf="isLogged"><a (click)="cerrarSesion()"><i class="material-icons">logout</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div *ngIf="pagina">
         <app-encabezado *ngIf="pagina.encabezado"></app-encabezado>
     </div>
@@ -14,14 +25,39 @@
             <div class="col s12 m8 offset-m2" *ngFor="let post of pagina.posts">
                 <div class="card">
                     <div class="card-image">
-                        <img [src]="post.imagen || '/assets/upload/default.jpg'">
+                        <img [src]="post.imagen || '/assets/img/default.png'">
                         <span class="card-title">{{post.titulo}}</span>
                     </div>
                     <div class="card-content" [innerHTML]="post.html">
-                        
+
                     </div>
                     <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <p class="titulo-comentarios indigo-text">Comentarios</p>
+                        <div *ngIf="post.comentarios.length == 0">No hay comentarios</div>
+                        <div *ngFor="let comentario of post.comentarios">
+                            <div class="row mt-1">
+                                <div class="col s2 l1">
+                                    <img class="responsive-img" [src]="comentario.usuario.foto || '/assets/img/usuario.png'">
+                                </div>
+                                <div class="col s10 l11 contenido-comentario">
+                                    <p class="right m-0 fecha-comentario">{{comentario.fecha | date:'d MMMM, yyyy HH:mm'}}</p>
+                                    <p class="usuario">{{comentario.usuario.nombre}}</p>
+                                    <p class="comentario">{{comentario.texto}}</p>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                        </div>
+                        <div class="row mb-0 mt-1" *ngIf="isLogged && post.permiteComentarios">
+                            <div class="col s2 l1">
+                                <img class="responsive-img" [src]="usuario.foto || '/assets/img/usuario.png'">
+                            </div>
+                            <div class="col s10 l11 pl-0">
+                                <div class="input-field mt-0">
+                                    <textarea placeholder="Escribe un comentario" [id]="post._id" class="materialize-textarea mb-0"></textarea>
+                                </div>
+                                <button class="btn-small indigo" (click)="publicar(post)">Publicar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

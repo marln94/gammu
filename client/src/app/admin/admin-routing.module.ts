@@ -23,12 +23,16 @@ import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { NuevoRolComponent } from './components/nuevo-rol/nuevo-rol.component';
 import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.component';
 import { CategoriasComponent } from "./components/categorias/categorias.component";
+import { EditarPaginaHtmlComponent } from "./components/editar-pagina-html/editar-pagina-html.component";
+import { EditarPostComponent } from "./components/editar-post/editar-post.component";
+import { EditarPaginaPostsComponent } from "./components/editar-pagina-posts/editar-pagina-posts.component";
 
 
 const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [NecesitaAuthGuard],
         children: [
             {
                 path: 'archivos',
@@ -132,6 +136,21 @@ const routes: Routes = [
             {
                 path: 'categorias',
                 component: CategoriasComponent,
+                canActivate: [NecesitaAuthGuard]
+            },
+            {
+                path: 'editar-pagina-html/:id',
+                component: EditarPaginaHtmlComponent,
+                canActivate: [NecesitaAuthGuard]
+            },
+            {
+                path: 'editar-pagina-posts/:id',
+                component: EditarPaginaPostsComponent,
+                canActivate: [NecesitaAuthGuard]
+            },
+            {
+                path: 'editar-post/:id',
+                component: EditarPostComponent,
                 canActivate: [NecesitaAuthGuard]
             }
         ]

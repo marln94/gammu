@@ -21,8 +21,29 @@ router.get('/', async function(req, res) {
     }
 })
 
-router.get('/:id', function(req, res) {
+router.get('/galeria', async function(req, res) {
+    try {
+        let ids = req.query.ids
+        let archivos = await archivo.find({
+            _id: {
+                $in: ids
+            }
+        }).sort({orden: 1})
+        res.json(archivos)
+    } catch (error) {
+        console.error(error);
+    }
+})
 
+router.get('/:id', async function(req, res) {
+    try {
+        let a = await archivo.find({
+            _id: req.params.id
+        })
+        res.json(a)
+    } catch (error) {
+        console.error(error);
+    }
 })
 
 router.post('/', upload.single('archivo'), async function(req, res) {
@@ -32,7 +53,7 @@ router.post('/', upload.single('archivo'), async function(req, res) {
         if (req.file.mimetype.includes('image')) {
             shortcut = JSON.stringify({tipo: 'imagen', id: id})
         } else {
-            shortcut = null
+            shortcut = JSON.stringify({tipo: 'enlace', id: id})
         }
 
         let ruta = 'http://localhost:3333/' + req.file.path.substring(6)

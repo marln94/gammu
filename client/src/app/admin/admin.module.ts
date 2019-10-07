@@ -26,6 +26,9 @@ import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { NuevoRolComponent } from './components/nuevo-rol/nuevo-rol.component';
 import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
+import { EditarPaginaHtmlComponent } from './components/editar-pagina-html/editar-pagina-html.component';
+import { EditarPostComponent } from './components/editar-post/editar-post.component';
+import { EditarPaginaPostsComponent } from './components/editar-pagina-posts/editar-pagina-posts.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
     NuevoRolComponent,
     NuevoUsuarioComponent,
     CategoriasComponent,
+    EditarPaginaHtmlComponent,
+    EditarPostComponent,
+    EditarPaginaPostsComponent,
   ],
   imports: [
     CommonModule,

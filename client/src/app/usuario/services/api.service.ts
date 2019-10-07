@@ -10,26 +10,31 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  login(correo, contrasena) {
-    return this.http.post(this.URL_BACKEND + 'login', {
+  async login(correo, contrasena) {
+    let respuesta = await this.http.post(this.URL_BACKEND + 'login', {
       correo: correo,
       contrasena: contrasena
     }, {
       withCredentials: true
-    });
+    }).toPromise();
+
+    return respuesta
   }
 
-  isLogged() {
-    return new Promise(resolve => {
-      this.http.get(this.URL_BACKEND + 'logged', {
-        withCredentials: true
-      }).subscribe(
-        r => {
-          resolve(r)
-        }
-      )
-    })
+  async getUsuario() {
+    let respuesta = await this.http.get(this.URL_BACKEND + 'usuariosesion', {
+      withCredentials: true
+    }).toPromise();
+
+    return respuesta
   }
+
+  async isLogged() {
+    return await this.http.get(this.URL_BACKEND + 'logged', {
+      withCredentials: true
+    }).toPromise()
+  }
+
 
   logout() {
     return this.http.get(this.URL_BACKEND + 'logout', {

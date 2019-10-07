@@ -1,0 +1,45 @@
+<div class="main">
+    <h3>Editar post</h3>
+
+    <div class="row">
+
+        <div class="col s12" id="editor">
+            <ckeditor (change)="onChange($event)" [(ngModel)]="htmlData" [editor]="Editor" [config]="editorConfig"></ckeditor>
+        </div>
+        <div class="col s12 mt-1">
+            <div class="input-field">
+                <input id="titulo-post" type="text" [(ngModel)]="titulo" class="validate">
+                <label for="titulo-post">Título</label>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="file-field input-field">
+                <div class="btn indigo">
+                    <span>Imagen</span>
+                    <input type="file" (change)="cambio($event)" accept="image/*">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <select [(ngModel)]="categoria">
+                <option value="" disabled selected>Seleccione una categoría</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</option>
+            </select>
+            <label>Categoría</label>
+        </div>
+        <div class="col s12 m6">
+            <label>
+                <input type="checkbox" [(ngModel)]="permiteComentarios" />
+                <span>Permitir comentarios</span>
+            </label>
+        </div>
+
+    </div>
+    <a class="btn indigo" (click)="guardar()">Guardar
+        <i class="material-icons left">save</i>
+    </a>
+</div>
