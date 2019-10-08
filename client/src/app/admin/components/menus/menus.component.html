@@ -18,28 +18,10 @@
             <th>Opciones</th>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Marlon Calderón</td>
+            <tr *ngFor="let menu of menus">
+                <td>{{menu._id}}</td>
+                <td>{{menu.nombre}}</td>
                 <td>
-                    <a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Marlon Calderón</td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Marlon Calderón</td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
                     <a href="#"><i class="material-icons indigo-text">delete</i></a>
                 </td>
             </tr>

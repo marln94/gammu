@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-menus',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenusComponent implements OnInit {
 
-  constructor() { }
+  URL_BACKEND = 'http://localhost:3333/api/'
+
+  menus
+
+  constructor(private http:HttpClient) { 
+    this.http.get(this.URL_BACKEND + 'menus').toPromise()
+      .then(respuesta => this.menus = respuesta)
+  }
 
   ngOnInit() {
   }

@@ -9,7 +9,7 @@
             <a href="#" data-target="sidenav" class="top-nav l sidenav-trigger full hide-on-large-only">
                 <i class="material-icons white-text">menu</i>
             </a>
-            <a routerLink="/admin" class="brand-logo">Logo</a>
+            <a routerLink="/admin" class="brand-logo"><img [src]="logo || '/assets/img/logo-white.png'" class="responsive-img logo"></a>
             <ul id="nav-mobile" class="right">
                     <li *ngIf="!isLogged"><a routerLink="/usuario/login">Iniciar sesión</a></li>
                     <li *ngIf="isLogged">{{usuario.nombre}}  {{usuario.apellido}}</li>

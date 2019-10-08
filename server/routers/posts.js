@@ -13,7 +13,22 @@ const upload = multer({ storage: storage })
 
 router.get('/', async function (req, res) {
     try {
-        let posts = await post.find().sort({ orden: 1 })
+        let posts = await post.aggregate([
+            {
+                $addFields: {
+                    autorId: {
+                        $toObjectId: "$autor"
+                    }
+                }
+            }, {
+                $lookup: {
+                    from: 'usuarios',
+                    localField: 'autorId',
+                    foreignField: '_id',
+                    as: 'autor'
+                }
+            }
+        ]).sort({ orden: 1 })
         res.json(posts)
     } catch (error) {
         console.error(error);
@@ -45,7 +60,8 @@ router.post('/', upload.single('imagen'), async function (req, res) {
             categoria: req.body.categoria,
             permiteComentarios: req.body.permiteComentarios,
             fecha: new Date(),
-            shortcut: shortcut
+            shortcut: shortcut,
+            autor: mongoose.Types.ObjectId(req.body.autor)
         })
 
         let respuesta = await a.save()
@@ -91,7 +107,7 @@ router.get('/todos/comentarios', async function (req, res) {
                     "comentarios.usuario.nombre": 1,
                     "comentarios.usuario.apellido": 1,
                     titulo:1,
-                    _id: 0
+                    _id: 1
                 }
             }]
         )
@@ -128,6 +144,24 @@ router.delete('/:id', async function (req, res) {
     try {
         let a = await post.remove({
             _id: req.params.id
+        })
+        res.json(a)
+    } catch (error) {
+        console.error(error);
+    }
+})
+
+router.delete('/:id/comentarios/:idcomentario', async function (req, res) {
+    try {
+        let a = await post.update({
+            _id: req.params.id
+        },
+        {
+            $pull: {
+                comentarios: {
+                    _id: mongoose.Types.ObjectId(req.params.idcomentario)
+                }
+            }
         })
         res.json(a)
     } catch (error) {

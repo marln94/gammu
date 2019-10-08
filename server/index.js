@@ -16,6 +16,7 @@ const configuracionesRouter = require('./routers/configuraciones')
 const paginasRouter = require('./routers/paginas')
 const categoriasRouter = require('./routers/categorias')
 const postsRouter = require('./routers/posts')
+const menusRouter = require('./routers/menus')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // support encoded bodies
@@ -44,6 +45,7 @@ app.use('/api/configuraciones', configuracionesRouter)
 app.use('/api/paginas', paginasRouter)
 app.use('/api/categorias', categoriasRouter)
 app.use('/api/posts', postsRouter)
+app.use('/api/menus', menusRouter)
 
 app.post("/api/login", async function (req, res) {
     try {

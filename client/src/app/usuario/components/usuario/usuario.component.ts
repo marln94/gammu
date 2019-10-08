@@ -35,11 +35,13 @@ export class UsuarioComponent implements OnInit {
 
     })
 
-
     this.http.get(this.URL_BACKEND + 'configuraciones').toPromise()
       .then(data => {
         if (data.length > 0) {
           this.title.setTitle(data[0].titulo)
+          if (data[0].favicon) {
+            document.getElementById('favicon').setAttribute('href', data[0].favicon)
+          }
         }
       })
   }

@@ -33,4 +33,10 @@ export class ComentariosComponent implements OnInit {
     this.instanciaModal[0].open()
   }
 
+  async eliminarComentario(postId, comentarioId){
+    let respuesta = await this.http.delete(this.URL_BACKEND + 'posts/' + postId + '/comentarios/' + comentarioId).toPromise()
+    console.log(respuesta)
+    this.posts = await this.http.get(this.URL_BACKEND + 'posts/todos/comentarios').toPromise()
+  }
+
 }

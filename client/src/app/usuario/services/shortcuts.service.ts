@@ -51,7 +51,7 @@ export class ShortcutsService {
           break;
 
         case 'entrada':
-          let post = await this.http.get(this.URL_BACKEND + 'posts/' + scJSON.id).toPromise()          
+          let post = await this.http.get(this.URL_BACKEND + 'posts/' + scJSON.id).toPromise()
           let htmlPost = `
           <div class="col s12 m8 offset-m2" *ngFor="let post of pagina.posts">
             <div class="card">
@@ -62,14 +62,31 @@ export class ShortcutsService {
               <div class="card-content">
                 ${await this.decodificarShortcuts(post[0].html)}  
               </div>
-              <div class="card-action">
-                  <a href="#">This is a link</a>
-              </div>
             </div>
           </div>
           `
-          //TODO mostrar comentarios
           html = html.replace(sc, htmlPost)
+          break;
+
+        case 'menu':
+          let menu = await this.http.get(this.URL_BACKEND + 'menus/' + scJSON.id).toPromise()
+          let htmlMenu = `
+          <div class="nav-wrapper">
+          <nav>
+            <div class="nav-wrapper indigo lighten-1">
+              <ul>`
+          for (let pagina of menu['paginas']) {
+            htmlMenu += `<li><a href="${pagina.url}">${pagina.nombre}</a></li>`
+          }
+          for (let enlace of menu['enlaces']) {
+            htmlMenu += `<li><a href="http://${enlace.url}">${enlace.nombre}</a></li>`
+          }
+          htmlMenu +=    `
+              </ul>
+            </div>
+          </nav>
+          `
+          html = html.replace(sc, htmlMenu)
           break;
 
         default:

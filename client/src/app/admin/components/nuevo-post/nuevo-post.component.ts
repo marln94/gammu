@@ -8,6 +8,8 @@ import { delay } from 'q';
 import swal from 'sweetalert2'
 import { Router } from '@angular/router';
 
+import { ApiService } from "../../services/api.service";
+
 @Component({
   selector: 'app-nuevo-post',
   templateUrl: './nuevo-post.component.html',
@@ -30,7 +32,7 @@ export class NuevoPostComponent implements OnInit {
 
   categorias = []
 
-  constructor(private http:HttpClient, private router: Router) { 
+  constructor(private http:HttpClient, private router: Router, private api:ApiService) { 
   }
   
   ngOnInit() {
@@ -57,7 +59,7 @@ export class NuevoPostComponent implements OnInit {
   }
 
   async guardar(){
-    if (this.htmlData === '' || this.titulo === '' || this.categoria === '-1') {
+    if (this.htmlData === '' || this.titulo === '' || this.categoria === '') {
       await swal.fire({
         title: 'Error',
         text: 'El post está vacío'
@@ -73,6 +75,9 @@ export class NuevoPostComponent implements OnInit {
     }
     formData.append('categoria', this.categoria)
     formData.append('permiteComentarios', JSON.stringify(this.permiteComentarios))
+
+    let usuario = await this.api.getUsuario()
+    formData.append('autor', usuario['_id'])
 
     let respuesta = await this.http.post(this.URL_BACKEND + 'posts', formData).toPromise()
     await swal.fire({

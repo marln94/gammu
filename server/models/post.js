@@ -9,7 +9,8 @@ var esquema = new mongoose.Schema(
         permiteComentarios: Boolean,
         fecha: Date,
         comentarios: Array,
-        shortcut: String
+        shortcut: String,
+        autor: String
     }
 );
 
