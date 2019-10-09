@@ -15,7 +15,7 @@ export class CategoriasComponent implements OnInit {
   categorias = []
 
   constructor(private http: HttpClient) {
-    this.http.get(this.URL_BACKEND + 'categorias').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'categorias').toPromise()
       .then(respuesta => {
         this.categorias = respuesta
       })
@@ -27,7 +27,7 @@ export class CategoriasComponent implements OnInit {
   async guardar() {
     if (this.nombre == '') return
     let respuesta = await this.http.post(this.URL_BACKEND + 'categorias', { nombre: this.nombre }).toPromise()
-    this.categorias = await this.http.get(this.URL_BACKEND + 'categorias').toPromise()
+    this.categorias = await this.http.get<any[]>(this.URL_BACKEND + 'categorias').toPromise()
     this.nombre = ''
   }
 
@@ -36,7 +36,7 @@ export class CategoriasComponent implements OnInit {
     await swal.fire({
       title: 'Categoría eliminada'
     })
-    this.categorias = await this.http.get(this.URL_BACKEND + 'categorias').toPromise()
+    this.categorias = await this.http.get<any[]>(this.URL_BACKEND + 'categorias').toPromise()
   }
 
 }

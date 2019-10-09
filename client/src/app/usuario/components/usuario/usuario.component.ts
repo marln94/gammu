@@ -20,6 +20,7 @@ export class UsuarioComponent implements OnInit {
   esPrincipal = true
   isLogged
   usuario = {}
+  logo
 
   constructor(private title: Title,
     private http: HttpClient,
@@ -36,7 +37,7 @@ export class UsuarioComponent implements OnInit {
     })
 
     this.http.get(this.URL_BACKEND + 'configuraciones').toPromise()
-      .then(data => {
+      .then((data: Array<any>) => {
         if (data.length > 0) {
           this.title.setTitle(data[0].titulo)
           if (data[0].favicon) {
@@ -44,6 +45,8 @@ export class UsuarioComponent implements OnInit {
           }
         }
       })
+    this.http.get(this.URL_BACKEND + 'configuraciones').toPromise()
+      .then(respuesta => this.logo = respuesta[0].logo)
   }
 
   ngOnInit() {
@@ -67,13 +70,13 @@ export class UsuarioComponent implements OnInit {
   }
 
   async publicar(post) {
-    let input = document.getElementById(post._id).value
+    let input = document.getElementById(post._id)['value']
     let respuesta = await this.http.post(this.URL_BACKEND + 'posts/' + post._id + '/comentarios', { texto: input, usuario: this.usuario }).toPromise()
     await this.cargarPágina()
   }
 
   async cargarPágina() {
-    let respuesta = await this.http.get(this.URL_BACKEND + 'paginas/url/' + this.route.snapshot.params.url).toPromise()
+    let respuesta = await this.http.get<any[]>(this.URL_BACKEND + 'paginas/url/' + this.route.snapshot.params.url).toPromise()
 
     if (respuesta.length > 0) {
       this.pagina = respuesta[0]

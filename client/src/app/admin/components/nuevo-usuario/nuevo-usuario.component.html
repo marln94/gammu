@@ -4,39 +4,38 @@
     <div class="row">
         <div class="col s12 m6">
             <div class="input-field">
-                <input id="nombre-usuario" type="text" class="validate">
+                <input id="nombre-usuario" [(ngModel)]="nombre" type="text" class="validate">
                 <label for="nombre-usuario">Nombre</label>
             </div>
         </div>
         <div class="col s12 m6">
             <div class="input-field">
-                <input id="apellido-usuario" type="text" class="validate">
+                <input id="apellido-usuario" [(ngModel)]="apellido" type="text" class="validate">
                 <label for="apellido-usuario">Apellido</label>
             </div>
         </div>
         <div class="col s12 m6">
             <div class="input-field">
-                <input id="correo-usuario" type="email" class="validate">
+                <input id="correo-usuario" [(ngModel)]="correo" type="email" class="validate">
                 <label for="correo-usuario">Correo electrónico</label>
             </div>
         </div>
         <div class="col s12 m6">
             <div class="input-field">
-                <input id="contrasena-usuario" type="password" class="validate">
+                <input id="contrasena-usuario" [(ngModel)]="contrasena" type="password" class="validate">
                 <label for="contrasena-usuario">Contraseña</label>
             </div>
         </div>
         <div class="input-field col s12 m6">
-            <select>
+            <select [(ngModel)]="rol">
                 <option value="" disabled selected>Seleccione un rol</option>
-                <option value="1">Rol 1</option>
-                <option value="2">Rol 2</option>
-                <option value="3">Rol 3</option>
+                <option value="admin">Administrador</option>
+                <option value="registrado">Registrado</option>
             </select>
             <label>Rol</label>
         </div>
     </div>
-    <a class="btn indigo" name="action">Crear
+    <a class="btn indigo" (click)="crear()">Crear
         <i class="material-icons left">add</i>
     </a>
 </div>

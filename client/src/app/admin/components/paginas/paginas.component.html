@@ -17,7 +17,8 @@
 
     </div>
 
-    <table>
+    <p *ngIf="paginas.length == 0">No hay páginas</p>
+    <table *ngIf="paginas.length > 0">
         <thead>
             <th>Título</th>
             <th>URL</th>

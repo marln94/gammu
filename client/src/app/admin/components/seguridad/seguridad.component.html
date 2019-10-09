@@ -1,54 +1,4 @@
 <div class="main">
-    <h3>Roles</h3>
-
-    <div class="row">
-
-        <div class="col">
-            <a routerLink="nuevo-rol" class="btn indigo mb-2" name="action">Rol
-                <i class="material-icons left">add</i>
-            </a>
-        </div>
-
-    </div>
-
-    <table>
-        <thead>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Opciones</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Rol 1</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
-                <td>
-                    <a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Rol 2</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Rol 3</td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. </td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-
-
-
 
     <h3>Usuarios</h3>
 
@@ -62,36 +12,21 @@
 
     </div>
 
-    <table>
+    <p *ngIf="usuarios.length == 0">No hay usuarios</p>
+    <table *ngIf="usuarios.length > 0">
         <thead>
             <th>Nombre</th>
+            <th>Correo</th>
             <th>Rol</th>
             <th>Opciones</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Usuario 1</td>
-                <td>Rol 1</td>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.correo}}</td>
+                <td>{{usuario.tipoUsuario}}</td>
                 <td>
-                    <a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Usuario 2</td>
-                <td>Rol 1</td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Usuario 3</td>
-                <td>Rol 2</td>
-                <td><a href="#"><i class="material-icons indigo-text">edit</i></a>
-                    &nbsp;
-                    <a href="#"><i class="material-icons indigo-text">delete</i></a>
+                    <a (click)="eliminar(usuario)"><i class="material-icons indigo-text">delete</i></a>
                 </td>
             </tr>
         </tbody>

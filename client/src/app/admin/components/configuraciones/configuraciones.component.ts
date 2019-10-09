@@ -24,7 +24,7 @@ export class ConfiguracionesComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.http.get(this.URL_BACKEND + 'configuraciones').toPromise()
-      .then(data => {
+      .then((data: Array<any>) => {
         if (data.length > 0) {
           this.titulo = data[0].titulo
           this.descripcion = data[0].descripcion
@@ -36,7 +36,7 @@ export class ConfiguracionesComponent implements OnInit {
 
   ngOnInit() {
     this.http.get(this.URL_BACKEND + 'configuraciones').toPromise()
-      .then(data => {
+      .then((data: Array<any>) => {
         if (data.length > 0) {
           if (data[0].palabrasClave) {
             for (let p of data[0].palabrasClave) {

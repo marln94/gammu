@@ -15,7 +15,7 @@ export class NecesitaAuthGuard implements CanActivate {
     let usuario = await this.api.getUsuario()
 
     if (await this.api.isLogged()) {
-      if (usuario.tipoUsuario == 'admin'){
+      if (usuario['tipoUsuario'] == 'admin'){
         return true;
       } else {
         this.router.navigate(['/'])

@@ -4,7 +4,6 @@ var esquema = new mongoose.Schema(
     {
         nombre : String,
         apellido : String,
-        usuario : String,
         contrasena:String,
         correo:String,
         tipoUsuario:String

@@ -36,7 +36,7 @@ export class NuevoPostComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.http.get(this.URL_BACKEND + 'categorias').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'categorias').toPromise()
       .then(respuesta => {
         this.categorias = respuesta
         delay(100).then(() => {

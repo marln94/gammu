@@ -17,6 +17,10 @@ class Database{
             console.error(JSON.stringify(error));   
         });
     }
+
+    conexion(){
+        return mongoose.connection
+    }
 }
 
 

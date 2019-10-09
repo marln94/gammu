@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 const paginaPrincipal = require('../models/paginaPrincipal');
 
 router.get('/', async function (req, res) {
-    try {
-        console.log('hola');
-        
+    try {        
         let paginas = await paginaPrincipal.find().sort({ orden: 1 })
         res.json(paginas)
     } catch (error) {

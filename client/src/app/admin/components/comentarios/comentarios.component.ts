@@ -17,7 +17,7 @@ export class ComentariosComponent implements OnInit {
   instanciaModal
 
   constructor(private http:HttpClient) { 
-    this.http.get(this.URL_BACKEND + 'posts/todos/comentarios').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'posts/todos/comentarios').toPromise()
       .then(respuesta => {
         this.posts = respuesta
       })
@@ -36,7 +36,7 @@ export class ComentariosComponent implements OnInit {
   async eliminarComentario(postId, comentarioId){
     let respuesta = await this.http.delete(this.URL_BACKEND + 'posts/' + postId + '/comentarios/' + comentarioId).toPromise()
     console.log(respuesta)
-    this.posts = await this.http.get(this.URL_BACKEND + 'posts/todos/comentarios').toPromise()
+    this.posts = await this.http.get<any[]>(this.URL_BACKEND + 'posts/todos/comentarios').toPromise()
   }
 
 }

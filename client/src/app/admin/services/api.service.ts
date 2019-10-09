@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   async isLogged() {
-    return await this.http.get(this.URL_BACKEND + 'logged', {
+    return await this.http.get<boolean>(this.URL_BACKEND + 'logged', {
       withCredentials: true
     }).toPromise()
   }

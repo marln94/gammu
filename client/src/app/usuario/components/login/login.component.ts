@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,11 @@ export class LoginComponent implements OnInit {
       } else if (respuesta['usuario']['tipoUsuario'] == 'registrado') {
         this.router.navigateByUrl('/');
       }
-
+    } else {
+      swal.fire({
+        title: respuesta['mensaje'],
+        type: 'error'
+      })
     }
   }
 

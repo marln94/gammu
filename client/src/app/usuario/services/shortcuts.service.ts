@@ -28,7 +28,7 @@ export class ShortcutsService {
         case 'galeria':
           let ids = scJSON.imagenes.map(value => 'ids=' + value)
           ids = ids.join('&')
-          let imagenes = await this.http.get(this.URL_BACKEND + 'archivos/galeria?' + ids).toPromise()
+          let imagenes = await this.http.get<any[]>(this.URL_BACKEND + 'archivos/galeria?' + ids).toPromise()
           let htmlGaleria = `
           <div class="slider">
             <ul class="slides">`

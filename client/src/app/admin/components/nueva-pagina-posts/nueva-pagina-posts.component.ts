@@ -27,12 +27,12 @@ export class NuevaPaginaPostsComponent implements OnInit {
   categorias = []
 
   constructor(private http: HttpClient, private router: Router) {
-    this.http.get(this.URL_BACKEND + 'categorias').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'categorias').toPromise()
       .then(respuesta => this.categorias = respuesta)
   }
 
   ngOnInit() {
-    this.http.get(this.URL_BACKEND + 'categorias').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'categorias').toPromise()
       .then(respuesta => {
         this.categorias = respuesta
         delay(100).then(() => {

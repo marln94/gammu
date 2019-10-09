@@ -13,10 +13,10 @@ export class PaginasComponent implements OnInit {
 
   URL_BACKEND = 'http://localhost:3333/api/'
 
-  paginas
+  paginas = []
 
   constructor(private http: HttpClient, private router:Router) {
-    this.http.get(this.URL_BACKEND + 'paginas').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'paginas').toPromise()
       .then(respuesta => {
         this.paginas = respuesta
       })
@@ -30,7 +30,7 @@ export class PaginasComponent implements OnInit {
     await swal.fire({
       title: 'Cambios guardados en ' + pagina.titulo
     })
-    this.http.get(this.URL_BACKEND + 'paginas').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'paginas').toPromise()
       .then(respuesta => {
         this.paginas = respuesta
       })

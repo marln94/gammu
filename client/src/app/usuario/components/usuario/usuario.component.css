@@ -56,3 +56,13 @@
     font-size: 1.4rem;
     font-weight: 600;
   }
+  @media only screen and (max-width : 992px) {
+    .logo {
+        padding-left: 0rem !important;
+    }
+}
+
+  .logo {
+    height: 2rem;
+    padding-left: 2rem;
+}

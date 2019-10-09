@@ -23,10 +23,10 @@ export class AdminComponent implements OnInit {
     this.http.get(this.URL_BACKEND + 'configuraciones').toPromise()
       .then(respuesta => {
         this.configuraciones = respuesta[0]
-        if (this.configuraciones.favicon) {
+        if (this.configuraciones && this.configuraciones.favicon) {
           document.getElementById('favicon').setAttribute('href', this.configuraciones.favicon)
         }
-        if (this.configuraciones.titulo != '') {
+        if (this.configuraciones && this.configuraciones.titulo != '') {
           this.title.setTitle(this.configuraciones.titulo)
         }
       })

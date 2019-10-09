@@ -17,9 +17,9 @@ export class PaginaPrincipalComponent implements OnInit {
 
   URL_BACKEND = 'http://localhost:3333/api/'
   imagenSubir
-  textoEncabezado
-  textoPie
-  htmlData
+  textoEncabezado = ''
+  textoPie = ''
+  htmlData = ''
 
   public Editor = ClassicEditor;
   public editorConfig = {

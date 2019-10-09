@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit {
   posts = []
 
   constructor(private http:HttpClient, private router:Router) { 
-    this.http.get(this.URL_BACKEND + 'posts').toPromise()
+    this.http.get<any[]>(this.URL_BACKEND + 'posts').toPromise()
       .then(respuesta => {
         this.posts = respuesta
       })
@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
 
   async eliminar(id) {
     let respuesta = await this.http.delete(this.URL_BACKEND + 'posts/' + id).toPromise()
-    this.posts = await this.http.get(this.URL_BACKEND + 'posts').toPromise()
+    this.posts = await this.http.get<any[]>(this.URL_BACKEND + 'posts').toPromise()
   }
 
   modificar(id) {
