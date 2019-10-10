@@ -20,8 +20,9 @@ Antes de iniciar la instalación debes instalar [NodeJS](https://nodejs.org/es/)
 
 	    node index.js
 
+- Repite los dos pasos anteriores pero dentro de la carpeta `/client`
 - Ahora solo debes abrir el navegador e ingresar la siguiente URL:
 
-	   localhost:3333
+	   localhost:4444
 
 ¡Listo! Ya tienes tu servidor levantado, listo para editar tu nueva súper página web.
